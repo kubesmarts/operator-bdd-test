@@ -4,4 +4,4 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: $(CERTIFICATE_NAMESPACE)/$(CERTIFICATE_NAME)
-  name: workflows.serverless.kiegroup.org
+  name: kogitoserverlessworkflows.serverless.kiegroup.org
