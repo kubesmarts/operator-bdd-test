@@ -11,3 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+package kubernetes
+
+import ctrl "sigs.k8s.io/controller-runtime/pkg/client"
+
+// IsObjectNew verifies if the given object hasn't been created in the cluster
+func IsObjectNew(object ctrl.Object) bool {
+	// UID should be enough, but we check for resourceVersion because the Fake client won't set UIDs, failing our tests
+	return len(object.GetUID()) == 0 && len(object.GetResourceVersion()) == 0
+}

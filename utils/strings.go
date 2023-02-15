@@ -11,3 +11,21 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+package utils
+
+import "strings"
+
+func RemoveFileExtension(fileName string) string {
+	if i := strings.LastIndex(fileName, "."); i >= 0 {
+		return fileName[:i]
+	}
+	return fileName
+}
+
+func RemoveKnownExtension(fileName, extension string) string {
+	if i := strings.LastIndex(fileName, extension); i >= 0 {
+		return fileName[:i]
+	}
+	return fileName
+}
