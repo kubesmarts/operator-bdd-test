@@ -1,13 +1,13 @@
-# permissions for end users to edit kogitoserverlessworkflows.
+# permissions for end users to edit sonataflowworkflows.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: kogitoserverlessworkflow-editor-role
+  name: sonataflowworkflow-editor-role
 rules:
   - apiGroups:
-      - sw.kogito.kie.org
+      - sonataflow.org
     resources:
-      - kogitoserverlessworkflows
+      - sonataflowworkflows
     verbs:
       - create
       - delete
@@ -17,8 +17,8 @@ rules:
       - update
       - watch
   - apiGroups:
-      - sw.kogito.kie.org
+      - sonataflow.org
     resources:
-      - kogitoserverlessworkflows/status
+      - sonataflowworkflows/status
     verbs:
       - get
