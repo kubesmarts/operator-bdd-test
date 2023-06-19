@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: sw.kogito.kie.org/v1alpha08
-kind: KogitoServerlessPlatform
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlowPlatform
 metadata:
-  name: kogito-workflow-platform
+  name: sonataflow-platform
 spec:
   platform:
-    buildStrategy: platform
+    baseImage: quay.io/kiegroup/kogito-swf-builder-nightly:latest
+    buildStrategyOptions:
+      KanikoBuildCacheEnabled: "true"

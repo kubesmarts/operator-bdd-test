@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: sw.kogito.kie.org/v1alpha08
-kind: KogitoServerlessWorkflow
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
 metadata:
   name: orderprocessing
   annotations:
-    sw.kogito.kie.org/description: Workflow for processing Orders and produce Logistics Events
-    sw.kogito.kie.org/version: 1.0.0
-    sw.kogito.kie.org/expressionLang: jsonpath
-    sw.kogito.kie.org/profile: dev
+    sonataflow.org/description: Workflow for processing Orders and produce Logistics Events
+    sonataflow.org/version: 1.0.0
+    sonataflow.org/expressionLang: jsonpath
+    sonataflow.org/profile: dev
 spec:
   resources:
     configMaps:
