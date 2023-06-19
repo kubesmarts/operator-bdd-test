@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: sw.kogito.kie.org/v1alpha08
-kind: KogitoServerlessWorkflow
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
 metadata:
   name: foreach
   annotations:
-    sw.kogito.kie.org/expressionLang: jq
-    sw.kogito.kie.org/version: "1.0"
-    sw.kogito.kie.org/description: An example of how to use for each state
+    sonataflow.org/expressionLang: jq
+    sonataflow.org/version: "1.0"
+    sonataflow.org/description: An example of how to use for each state
 spec:
   flow:
     start: start

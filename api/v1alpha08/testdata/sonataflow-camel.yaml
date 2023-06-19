@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: sw.kogito.kie.org/v1alpha08
-kind: KogitoServerlessWorkflow
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
 metadata:
   name: camel-custom-function
   annotations:
-    sw.kogito.kie.org/version: 1.0.0
-    sw.kogito.kie.org/expressionLang: jq
-    sw.kogito.kie.org/description: ""
+    sonataflow.org/version: 1.0.0
+    sonataflow.org/expressionLang: jq
+    sonataflow.org/description: ""
 spec:
   flow:
     start: start

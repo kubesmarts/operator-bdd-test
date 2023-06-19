@@ -19,22 +19,22 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// NewKogitoServerlessPlatformList returns an empty list of Platform objects
-func NewKogitoServerlessPlatformList() KogitoServerlessPlatformList {
-	return KogitoServerlessPlatformList{
+// NewSonataFlowPlatformList returns an empty list of Platform objects
+func NewSonataFlowPlatformList() SonataFlowPlatformList {
+	return SonataFlowPlatformList{
 		TypeMeta: metav1.TypeMeta{
 			APIVersion: GroupVersion.String(),
-			Kind:       KogitoServerlessPlatformKind,
+			Kind:       SonataFlowPlatformKind,
 		},
 	}
 }
 
-// NewKogitoServerlessPlatform returns the basic Platform definition
-func NewKogitoServerlessPlatform(namespace string, name string) KogitoServerlessPlatform {
-	return KogitoServerlessPlatform{
+// NewSonataFlowPlatform returns the basic Platform definition
+func NewSonataFlowPlatform(namespace string, name string) SonataFlowPlatform {
+	return SonataFlowPlatform{
 		TypeMeta: metav1.TypeMeta{
 			APIVersion: GroupVersion.String(),
-			Kind:       KogitoServerlessPlatformKind,
+			Kind:       SonataFlowPlatformKind,
 		},
 		ObjectMeta: metav1.ObjectMeta{
 			Namespace: namespace,
@@ -44,7 +44,7 @@ func NewKogitoServerlessPlatform(namespace string, name string) KogitoServerless
 }
 
 // GetCondition returns the condition with the provided type.
-func (in *KogitoServerlessPlatformStatus) GetCondition(condType PlatformConditionType) *PlatformCondition {
+func (in *SonataFlowPlatformStatus) GetCondition(condType PlatformConditionType) *PlatformCondition {
 	for i := range in.Conditions {
 		c := in.Conditions[i]
 		if c.Type == condType {
@@ -55,7 +55,7 @@ func (in *KogitoServerlessPlatformStatus) GetCondition(condType PlatformConditio
 }
 
 // SetErrorCondition sets the condition error for the given platform
-func (in *KogitoServerlessPlatformStatus) SetErrorCondition(condType PlatformConditionType, reason string, err error) {
+func (in *SonataFlowPlatformStatus) SetErrorCondition(condType PlatformConditionType, reason string, err error) {
 	in.SetConditions(PlatformCondition{
 		Type:               condType,
 		Status:             corev1.ConditionFalse,
@@ -70,7 +70,7 @@ func (in *KogitoServerlessPlatformStatus) SetErrorCondition(condType PlatformCon
 //
 // If a condition that we are about to add already exists and has the same status and
 // reason then we are not going to update.
-func (in *KogitoServerlessPlatformStatus) SetConditions(conditions ...PlatformCondition) {
+func (in *SonataFlowPlatformStatus) SetConditions(conditions ...PlatformCondition) {
 	for _, condition := range conditions {
 		if condition.LastUpdateTime.IsZero() {
 			condition.LastUpdateTime = metav1.Now()
@@ -95,7 +95,7 @@ func (in *KogitoServerlessPlatformStatus) SetConditions(conditions ...PlatformCo
 }
 
 // RemoveCondition removes the resource condition with the provided type.
-func (in *KogitoServerlessPlatformStatus) RemoveCondition(condType PlatformConditionType) {
+func (in *SonataFlowPlatformStatus) RemoveCondition(condType PlatformConditionType) {
 	newConditions := in.Conditions[:0]
 	for _, c := range in.Conditions {
 		if c.Type != condType {
@@ -125,7 +125,7 @@ type ResourceCondition interface {
 var _ ResourceCondition = PlatformCondition{}
 
 // GetConditions --
-func (in *KogitoServerlessPlatformStatus) GetConditions() []ResourceCondition {
+func (in *SonataFlowPlatformStatus) GetConditions() []ResourceCondition {
 	res := make([]ResourceCondition, 0, len(in.Conditions))
 	for _, c := range in.Conditions {
 		res = append(res, c)

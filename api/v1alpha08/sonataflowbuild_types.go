@@ -58,13 +58,13 @@ type BuildTemplate struct {
 	Arguments []string `json:"arguments,omitempty"`
 }
 
-// KogitoServerlessBuildSpec an abstraction over the actual build process performed by the platform.
-type KogitoServerlessBuildSpec struct {
+// SonataFlowBuildSpec an abstraction over the actual build process performed by the platform.
+type SonataFlowBuildSpec struct {
 	BuildTemplate `json:",inline"`
 }
 
-// KogitoServerlessBuildStatus defines the observed state of KogitoServerlessBuild
-type KogitoServerlessBuildStatus struct {
+// SonataFlowBuildStatus defines the observed state of SonataFlowBuild
+type SonataFlowBuildStatus struct {
 	// The final image tag produced by this build instance
 	ImageTag string `json:"imageTag,omitempty"`
 	// Current phase of the build
@@ -77,7 +77,7 @@ type KogitoServerlessBuildStatus struct {
 }
 
 // SetInnerBuild use to define a new object pointer to the inner build.
-func (k *KogitoServerlessBuildStatus) SetInnerBuild(innerBuilder interface{}) error {
+func (k *SonataFlowBuildStatus) SetInnerBuild(innerBuilder interface{}) error {
 	obj, err := json.Marshal(innerBuilder)
 	if err != nil {
 		return err
@@ -87,7 +87,7 @@ func (k *KogitoServerlessBuildStatus) SetInnerBuild(innerBuilder interface{}) er
 }
 
 // GetInnerBuild fetch into the given inner build the value from unstructured.
-func (k *KogitoServerlessBuildStatus) GetInnerBuild(innerBuild interface{}) error {
+func (k *SonataFlowBuildStatus) GetInnerBuild(innerBuild interface{}) error {
 	if len(k.InnerBuild.Raw) == 0 {
 		return nil
 	}
@@ -97,32 +97,32 @@ func (k *KogitoServerlessBuildStatus) GetInnerBuild(innerBuild interface{}) erro
 	return nil
 }
 
-// KogitoServerlessBuild is the Schema for the kogitoserverlessbuilds API
+// SonataFlowBuild is the Schema for the sonataflowbuilds API
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:object:root=true
 // +kubebuilder:object:generate=true
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="Image",type=string,JSONPath=`.status.imageTag`
 // +kubebuilder:printcolumn:name="Phase",type=string,JSONPath=`.status.buildPhase`
-// +kubebuilder:resource:shortName={"ksb", "kbuild", "kbuilds"}
-type KogitoServerlessBuild struct {
+// +kubebuilder:resource:shortName={"sfb", "sfbuild", "sfbuilds"}
+type SonataFlowBuild struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   KogitoServerlessBuildSpec   `json:"spec,omitempty"`
-	Status KogitoServerlessBuildStatus `json:"status,omitempty"`
+	Spec   SonataFlowBuildSpec   `json:"spec,omitempty"`
+	Status SonataFlowBuildStatus `json:"status,omitempty"`
 }
 
-// KogitoServerlessBuildList is the Schema for the kogitoserverlessbuildsList API
+// SonataFlowBuildList is the Schema for the sonataflowbuildsList API
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:object:root=true
 // +kubebuilder:object:generate=true
-type KogitoServerlessBuildList struct {
+type SonataFlowBuildList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []KogitoServerlessBuild `json:"items"`
+	Items           []SonataFlowBuild `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&KogitoServerlessBuild{}, &KogitoServerlessBuildList{})
+	SchemeBuilder.Register(&SonataFlowBuild{}, &SonataFlowBuildList{})
 }

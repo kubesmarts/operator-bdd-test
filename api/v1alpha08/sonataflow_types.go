@@ -29,9 +29,9 @@ import (
 //
 // - Id, name, and key are replaced by the Custom Resource's name. Must follow the Kubernetes naming patterns (RFC1123).
 //
-// - Description can be added in the CR's annotation field sw.kie.kogito.org/description
+// - Description can be added in the CR's annotation field sonataflow.org/description
 //
-// - Version is also defined in the CR's annotation, field sw.kie.kogito.org/version
+// - Version is also defined in the CR's annotation, field sonataflow.org/version
 //
 // - SpecVersion is in the CR's apiVersion, for example v1alpha08 means that it follows the specification version 0.8.
 type Flow struct {
@@ -108,8 +108,8 @@ type ConfigMapWorkflowResource struct {
 	WorkflowPath string `json:"workflowPath,omitempty"`
 }
 
-// KogitoServerlessWorkflowSpec defines the desired state of KogitoServerlessWorkflow
-type KogitoServerlessWorkflowSpec struct {
+// SonataFlowSpec defines the desired state of SonataFlow
+type SonataFlowSpec struct {
 	// +kubebuilder:validation:Required
 	Flow Flow `json:"flow"`
 	// Resources workflow resources that are linked to this workflow definition.
@@ -117,8 +117,8 @@ type KogitoServerlessWorkflowSpec struct {
 	Resources WorkflowResources `json:"resources,omitempty"`
 }
 
-// KogitoServerlessWorkflowStatus defines the observed state of KogitoServerlessWorkflow
-type KogitoServerlessWorkflowStatus struct {
+// SonataFlowStatus defines the observed state of SonataFlow
+type SonataFlowStatus struct {
 	api.Status `json:",inline"`
 	// +optional
 	Address duckv1.Addressable `json:"address,omitempty"`
@@ -128,83 +128,83 @@ type KogitoServerlessWorkflowStatus struct {
 	Endpoint               *apis.URL   `json:"endpoint,omitempty"`
 }
 
-func (s *KogitoServerlessWorkflowStatus) GetTopLevelConditionType() api.ConditionType {
+func (s *SonataFlowStatus) GetTopLevelConditionType() api.ConditionType {
 	return api.RunningConditionType
 }
 
-func (s *KogitoServerlessWorkflowStatus) IsReady() bool {
+func (s *SonataFlowStatus) IsReady() bool {
 	return s.GetTopLevelCondition().IsTrue()
 }
 
-func (s *KogitoServerlessWorkflowStatus) GetTopLevelCondition() *api.Condition {
+func (s *SonataFlowStatus) GetTopLevelCondition() *api.Condition {
 	return s.GetCondition(s.GetTopLevelConditionType())
 }
 
-func (s *KogitoServerlessWorkflowStatus) Manager() api.ConditionsManager {
+func (s *SonataFlowStatus) Manager() api.ConditionsManager {
 	return api.NewConditionManager(s, api.RunningConditionType, api.BuiltConditionType)
 }
 
-func (s *KogitoServerlessWorkflowStatus) IsWaitingForPlatform() bool {
+func (s *SonataFlowStatus) IsWaitingForPlatform() bool {
 	cond := s.GetCondition(api.RunningConditionType)
 	return cond.IsFalse() && cond.Reason == api.WaitingForPlatformReason
 }
 
-func (s *KogitoServerlessWorkflowStatus) IsWaitingForDeployment() bool {
+func (s *SonataFlowStatus) IsWaitingForDeployment() bool {
 	cond := s.GetCondition(api.RunningConditionType)
 	return cond.IsFalse() && cond.Reason == api.WaitingForDeploymentReason
 }
 
 // IsChildObjectsProblem indicates a problem during objects creation during reconciliation
 // For example, a deployment that couldn't be created or a referenced object not found.
-func (s *KogitoServerlessWorkflowStatus) IsChildObjectsProblem() bool {
+func (s *SonataFlowStatus) IsChildObjectsProblem() bool {
 	cond := s.GetCondition(api.RunningConditionType)
 	// You can add more conditions that meet this conditional here
 	return cond.IsFalse() && (cond.Reason == api.ExternalResourcesNotFoundReason)
 }
 
-func (s *KogitoServerlessWorkflowStatus) IsWaitingForBuild() bool {
+func (s *SonataFlowStatus) IsWaitingForBuild() bool {
 	cond := s.GetCondition(api.RunningConditionType)
 	return cond.IsFalse() && cond.Reason == api.WaitingForBuildReason
 }
 
-func (s *KogitoServerlessWorkflowStatus) IsBuildRunningOrUnknown() bool {
+func (s *SonataFlowStatus) IsBuildRunningOrUnknown() bool {
 	cond := s.GetCondition(api.BuiltConditionType)
 	return cond.IsUnknown() || (cond.IsFalse() && cond.Reason == api.BuildIsRunningReason)
 }
 
-func (s *KogitoServerlessWorkflowStatus) IsBuildFailed() bool {
+func (s *SonataFlowStatus) IsBuildFailed() bool {
 	cond := s.GetCondition(api.BuiltConditionType)
 	return cond.IsFalse() && cond.Reason == api.BuildFailedReason
 }
 
-// KogitoServerlessWorkflow is the Schema for the kogitoserverlessworkflows API
+// SonataFlow is the Schema for the sonataflows API
 // +kubebuilder:object:root=true
 // +kubebuilder:object:generate=true
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:shortName={"ksw", "workflow", "workflows"}
+// +kubebuilder:resource:shortName={"sf", "workflow", "workflows"}
 // +k8s:openapi-gen=true
-// +kubebuilder:printcolumn:name="Profile",type=string,JSONPath=`.metadata.annotations.sw\.kogito\.kie\.org\/profile`
-// +kubebuilder:printcolumn:name="Version",type=string,JSONPath=`.metadata.annotations.sw\.kogito\.kie\.org\/version`
+// +kubebuilder:printcolumn:name="Profile",type=string,JSONPath=`.metadata.annotations.sonataflow\.org\/profile`
+// +kubebuilder:printcolumn:name="Version",type=string,JSONPath=`.metadata.annotations.sonataflow\.org\/version`
 // +kubebuilder:printcolumn:name="URL",type=string,JSONPath=`.status.endpoint`
 // +kubebuilder:printcolumn:name="Ready",type=string,JSONPath=`.status.conditions[?(@.type=='Running')].status`
 // +kubebuilder:printcolumn:name="Reason",type=string,JSONPath=`.status.conditions[?(@.type=='Running')].reason`
-type KogitoServerlessWorkflow struct {
+type SonataFlow struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   KogitoServerlessWorkflowSpec   `json:"spec,omitempty"`
-	Status KogitoServerlessWorkflowStatus `json:"status,omitempty"`
+	Spec   SonataFlowSpec   `json:"spec,omitempty"`
+	Status SonataFlowStatus `json:"status,omitempty"`
 }
 
-// KogitoServerlessWorkflowList contains a list of KogitoServerlessWorkflow
+// SonataFlowList contains a list of SonataFlow
 // +kubebuilder:object:root=true
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-type KogitoServerlessWorkflowList struct {
+type SonataFlowList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []KogitoServerlessWorkflow `json:"items"`
+	Items           []SonataFlow `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&KogitoServerlessWorkflow{}, &KogitoServerlessWorkflowList{})
+	SchemeBuilder.Register(&SonataFlow{}, &SonataFlowList{})
 }

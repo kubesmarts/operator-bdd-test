@@ -42,8 +42,8 @@ type ConfigurationSpec struct {
 }
 
 const (
-	// KogitoServerlessPlatformKind is the Kind name of the KogitoServerlessPlatform CR
-	KogitoServerlessPlatformKind string = "KogitoServerlessPlatform"
+	// SonataFlowPlatformKind is the Kind name of the SonataFlowPlatform CR
+	SonataFlowPlatformKind string = "SonataFlowPlatform"
 )
 
 // PlatformCluster is the kind of orchestration cluster the platform is installed into
@@ -129,9 +129,9 @@ func (b *BuildPlatformTemplate) IsOptionEmpty(option string) bool {
 	return false
 }
 
-// KogitoServerlessPlatformSpec defines the desired state of KogitoServerlessPlatform
-type KogitoServerlessPlatformSpec struct {
-	// BuildTemplate specify how to build the Workflow. It's used as a template for the KogitoServerlessBuild
+// SonataFlowPlatformSpec defines the desired state of SonataFlowPlatform
+type SonataFlowPlatformSpec struct {
+	// BuildTemplate specify how to build the Workflow. It's used as a template for the SonataFlowBuild
 	BuildTemplate BuildTemplate `json:"build,omitempty"`
 	// BuildPlatform specify how is the platform where we want to build the Workflow
 	BuildPlatform BuildPlatformTemplate `json:"platform,omitempty"`
@@ -146,17 +146,17 @@ type KogitoServerlessPlatformSpec struct {
 type PlatformPhase string
 
 const (
-	// PlatformPhaseNone when the KogitoServerlessPlatform does not exist
+	// PlatformPhaseNone when the SonataFlowPlatform does not exist
 	PlatformPhaseNone PlatformPhase = ""
-	// PlatformPhaseCreating when the KogitoServerlessPlatform is under creation process
+	// PlatformPhaseCreating when the SonataFlowPlatform is under creation process
 	PlatformPhaseCreating PlatformPhase = "Creating"
-	// PlatformPhaseWarming when the KogitoServerlessPlatform is warming (ie, creating Kaniko cache)
+	// PlatformPhaseWarming when the SonataFlowPlatform is warming (ie, creating Kaniko cache)
 	PlatformPhaseWarming PlatformPhase = "Warming"
-	// PlatformPhaseReady when the KogitoServerlessPlatform is ready
+	// PlatformPhaseReady when the SonataFlowPlatform is ready
 	PlatformPhaseReady PlatformPhase = "Ready"
-	// PlatformPhaseError when the KogitoServerlessPlatform had some error (see Conditions)
+	// PlatformPhaseError when the SonataFlowPlatform had some error (see Conditions)
 	PlatformPhaseError PlatformPhase = "Error"
-	// PlatformPhaseDuplicate when the KogitoServerlessPlatform is duplicated
+	// PlatformPhaseDuplicate when the SonataFlowPlatform is duplicated
 	PlatformPhaseDuplicate PlatformPhase = "Duplicate"
 )
 
@@ -183,8 +183,8 @@ type PlatformCondition struct {
 	Message string `json:"message,omitempty"`
 }
 
-// KogitoServerlessPlatformStatus defines the observed state of KogitoServerlessPlatform
-type KogitoServerlessPlatformStatus struct {
+// SonataFlowPlatformStatus defines the observed state of SonataFlowPlatform
+type SonataFlowPlatformStatus struct {
 	// Cluster what kind of cluster you're running (ie, plain Kubernetes or OpenShift)
 	Cluster PlatformCluster `json:"cluster,omitempty"`
 	// ObservedGeneration is the most recent generation observed for this Platform.
@@ -193,39 +193,39 @@ type KogitoServerlessPlatformStatus struct {
 	Phase PlatformPhase `json:"phase,omitempty"`
 	// Conditions which are the conditions met (particularly useful when in ERROR phase)
 	Conditions []PlatformCondition `json:"conditions,omitempty"`
-	// Version the Kogito Serverless operator version controlling this Platform
+	// Version the operator version controlling this Platform
 	Version string `json:"version,omitempty"`
-	// Info generic information related to the build of Kogito Serverless operator
+	// Info generic information related to the build
 	Info map[string]string `json:"info,omitempty"`
 }
 
-// KogitoServerlessPlatform is the Schema for the kogitoserverlessplatforms API
+// SonataFlowPlatform is the Schema for the sonataflowplatforms API
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:object:root=true
 // +kubebuilder:object:generate=true
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:shortName={"ksp", "kplatform", "kplatforms"}
+// +kubebuilder:resource:shortName={"sfp", "sfplatform", "sfplatforms"}
 // +kubebuilder:printcolumn:name="Cluster",type=string,JSONPath=`.status.cluster`
 // +kubebuilder:printcolumn:name="Phase",type=string,JSONPath=`.status.phase`
 // +kubebuilder:printcolumn:name="Ready",type=string,JSONPath=`.status.phase=='Ready'`
-type KogitoServerlessPlatform struct {
+type SonataFlowPlatform struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   KogitoServerlessPlatformSpec   `json:"spec,omitempty"`
-	Status KogitoServerlessPlatformStatus `json:"status,omitempty"`
+	Spec   SonataFlowPlatformSpec   `json:"spec,omitempty"`
+	Status SonataFlowPlatformStatus `json:"status,omitempty"`
 }
 
-// KogitoServerlessPlatformList contains a list of KogitoServerlessPlatform
+// SonataFlowPlatformList contains a list of SonataFlowPlatform
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:object:root=true
 // +kubebuilder:object:generate=true
-type KogitoServerlessPlatformList struct {
+type SonataFlowPlatformList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []KogitoServerlessPlatform `json:"items"`
+	Items           []SonataFlowPlatform `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&KogitoServerlessPlatform{}, &KogitoServerlessPlatformList{})
+	SchemeBuilder.Register(&SonataFlowPlatform{}, &SonataFlowPlatformList{})
 }
