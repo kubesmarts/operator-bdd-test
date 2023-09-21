@@ -18,6 +18,9 @@
 MINIKUBE_PROFILE=${1:-minikube}
 echo "Using minikube profile ${MINIKUBE_PROFILE}"
 
+# clean up previous runs
+make undeploy
+
 export OPERATOR_IMAGE_NAME=localhost/kogito-serverless-operator:0.0.1
 eval "$(minikube -p "${MINIKUBE_PROFILE}" docker-env)"
 if ! make docker-build IMG="${OPERATOR_IMAGE_NAME}"; then
