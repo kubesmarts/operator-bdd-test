@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2022 Red Hat, Inc. and/or its affiliates
+# Copyright 2020 Red Hat, Inc. and/or its affiliates
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if ! hash addlicense 2>/dev/null; then
-  go install github.com/google/addlicense@latest
-fi
+script_dir_path=`dirname "${BASH_SOURCE[0]}"`
+source ${script_dir_path}/env.sh
 
-# shellcheck disable=SC2035
-addlicense -c "Red Hat, Inc. and/or its affiliates" -l=apache -ignore=test/samples/*.yaml -ignore=container-builder/examples/**/*.yaml Dockerfile hack api bddframework controllers utils test testbdd container-builder workflowproj
+clean_cluster_resources 'crds' "$(getAllDependentCrds)"
