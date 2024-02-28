@@ -17,12 +17,21 @@ kind: SonataFlowPlatform
 metadata:
   name: sonataflow-platform
 spec:
+  persistence:
+    postgresql:
+      secretRef:
+        name: postgres-secrets
+        userKey: POSTGRES_USER
+        passwordKey: POSTGRES_PASSWORD
+      serviceRef:
+        name: postgres
+        port: 5432
+        databaseName: sonataflow
   build:
+    template:
+      buildArgs:
+      - name: QUARKUS_EXTENSIONS
+        value: org.kie.kogito:kogito-addons-quarkus-persistence-jdbc:999-SNAPSHOT,io.quarkus:quarkus-jdbc-postgresql:3.2.9.Final,io.quarkus:quarkus-agroal:3.2.9.Final
     config:
       strategyOptions:
         KanikoBuildCacheEnabled: "true"
-  services:
-    dataIndex:
-      enabled: true
-    jobService:
-      enabled: true

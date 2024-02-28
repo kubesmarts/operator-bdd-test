@@ -18,10 +18,19 @@ metadata:
   name: sonataflow-platform
 spec:
   build:
-    template:
-      buildArgs:
-      - name: QUARKUS_EXTENSIONS
-        value: org.kie.kogito:kogito-addons-quarkus-jobs-knative-eventing:999-SNAPSHOT
+    config:
+      strategyOptions:
+        KanikoBuildCacheEnabled: "true"
+  persistence:
+    postgresql:
+      secretRef:
+        name: postgres-secrets
+        userKey: USER
+        passwordKey: PASSWORD
+      serviceRef:
+        name: no-db-exists
+        port: 5432
+        databaseName: find-me        
   services:
     dataIndex:
       enabled: false
@@ -53,3 +62,4 @@ spec:
             image: registry.access.redhat.com/ubi9/ubi-micro:latest
             imagePullPolicy: IfNotPresent
             command: [ 'sh', '-c', 'until (echo 1 > /dev/tcp/postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local/5432) >/dev/null 2>&1; do echo "Waiting for postgres server"; sleep 3; done;' ]
+
