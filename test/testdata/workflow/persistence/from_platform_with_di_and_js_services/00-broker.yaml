@@ -12,23 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: sonataflow.org/v1alpha08
-kind: SonataFlowPlatform
+apiVersion: eventing.knative.dev/v1
+kind: Broker
 metadata:
-  name: sonataflow-platform
-spec:
-  eventing:
-    broker:
-      ref:
-        apiVersion: eventing.knative.dev/v1
-        kind: Broker
-        name: default
-  build:
-    config:
-      strategyOptions:
-        KanikoBuildCacheEnabled: "true"
-  services:
-    dataIndex:
-      enabled: true
-    jobService:
-      enabled: true
+  name: default
+spec: {}
+

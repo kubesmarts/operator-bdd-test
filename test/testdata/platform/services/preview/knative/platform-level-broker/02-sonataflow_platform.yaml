@@ -23,16 +23,7 @@ spec:
         apiVersion: eventing.knative.dev/v1
         kind: Broker
         name: default
-  persistence:
-    postgresql:
-      secretRef:
-        name: postgres-secrets
-        userKey: POSTGRES_USER
-        passwordKey: POSTGRES_PASSWORD
-      serviceRef:
-        name: postgres
-        port: 5432
-        databaseName: sonataflow
+        namespace: ${BROKER_NAMESPACE}
   build:
     config:
       strategyOptions:
@@ -42,20 +33,45 @@ spec:
       enabled: true
       persistence:
         migrateDBOnStartUp: true
+        postgresql:
+          jdbcUrl: jdbc:postgresql://postgres:5432/sonataflow?currentSchema=data-index-service
+          secretRef:
+            name: postgres-secrets
+            userKey: POSTGRES_USER
+            passwordKey: POSTGRES_PASSWORD
       podTemplate:
         initContainers:
           - name: init-postgres
             image: registry.access.redhat.com/ubi9/ubi-micro:latest
             imagePullPolicy: IfNotPresent
             command: [ 'sh', '-c', 'until (echo 1 > /dev/tcp/postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local/5432) >/dev/null 2>&1; do echo "Waiting for postgres server"; sleep 3; done;' ]
+        container:
+          env:
+            - name: MY_CUSTOM_VARIABLE
+              value: "OKAY"
+            - name: QUARKUS_DATASOURCE_PASSWORD
+#             This value should not be used since it's already set by the operator. If used, the test will fail.
+              value: "SHOULD_NOT_BE_USED"
     jobService:
       enabled: true
       persistence:
         migrateDBOnStartUp: true
+        postgresql:
+          jdbcUrl: jdbc:postgresql://postgres:5432/sonataflow?currentSchema=jobs-service
+          secretRef:
+            name: postgres-secrets
+            userKey: POSTGRES_USER
+            passwordKey: POSTGRES_PASSWORD
       podTemplate:
         initContainers:
           - name: init-postgres
             image: registry.access.redhat.com/ubi9/ubi-micro:latest
             imagePullPolicy: IfNotPresent
             command: [ 'sh', '-c', 'until (echo 1 > /dev/tcp/postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local/5432) >/dev/null 2>&1; do echo "Waiting for postgres server"; sleep 3; done;' ]
-
+        container:
+          env:
+            - name: MY_CUSTOM_VARIABLE
+              value: "OKAY"
+            - name: QUARKUS_DATASOURCE_PASSWORD
+#             This value should not be used since it's already set by the operator. If used, the test will fail.
+              value: "SHOULD_NOT_BE_USED"
