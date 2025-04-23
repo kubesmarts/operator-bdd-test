@@ -2,8 +2,8 @@ TEST_PARAMS=$(foreach V,$(.VARIABLES),$(if $(filter command line, $(origin $V)),
 
 .PHONY: fmt
 fmt: ## Run go fmt against code.
-	go mod tidy
-	go fmt ./...
+	go mod tidy ;
+	go fmt ./... ;
 
 .PHONY: vet
 vet: ## Run go vet against code.
