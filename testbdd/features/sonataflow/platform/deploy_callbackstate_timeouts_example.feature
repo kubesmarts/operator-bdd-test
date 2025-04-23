@@ -3,7 +3,6 @@ Feature: Deploy SonataFlow Operator and SonataFlowPlatform with DI and JS with c
   @previewMode1
   Scenario: calbackstate-timeouts-example previewMode E2E test
     Given Namespace is created
-    When SonataFlow Operator is deployed
     When Postgres is deployed
     When SonataFlowPlatform with DI is deployed
     When SonataFlow callbackstatetimeouts example is deployed

@@ -3,7 +3,6 @@ Feature: Deploy SonataFlow Operator and SonataFlowPlatform with order-processing
   @devMode
   Scenario: order-processing DevMode E2E test
     Given Namespace is created
-    When SonataFlow Operator is deployed
     When SonataFlowPlatform is deployed
     When SonataFlow orderprocessing example is deployed
     Then SonataFlow "orderprocessing" has the condition "Running" set to "True" within 5 minutes

@@ -3,7 +3,6 @@ Feature: Deploy SonataFlowPlatform with Data Index and JobService using Postgres
   Background:
     Given Namespace is created
     When Postgres is deployed
-    When SonataFlow Operator is deployed
     When SonataFlowPlatform with DataIndexAndJobsService using Postgres is deployed
 
   @devMode

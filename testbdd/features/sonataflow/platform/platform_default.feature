@@ -2,7 +2,6 @@ Feature: Deploy SonataFlowPlatform with default configuration
 
   Background:
     Given Namespace is created
-    When SonataFlow Operator is deployed
     When SonataFlowPlatform is deployed
 
   @devMode

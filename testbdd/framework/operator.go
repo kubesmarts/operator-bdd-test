@@ -32,7 +32,7 @@ import (
 const (
 	sonataFlowOperatorTimeoutInMin = 5
 
-	sonataFlowOperatorName                  = "sonataflow-operator"
+	sonataFlowOperatorName                  = "logic-operator-rhel8"
 	sonataFlowOperatorDeploymentName        = sonataFlowOperatorName + "-controller-manager"
 	sonataFlowOperatorPullImageSecretPrefix = sonataFlowOperatorName + "-dockercfg"
 )
