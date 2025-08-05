@@ -27,7 +27,7 @@ import (
 	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/client"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/client"
 )
 
 // FromEnvToArgs converts an EnvVar array into an args string slice. E.g. name=value,name=value

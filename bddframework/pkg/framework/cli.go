@@ -22,7 +22,7 @@ package framework
 import (
 	"os"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
 )
 
 // CheckCliBinaryExist checks if the CLI binary does exist

@@ -30,7 +30,7 @@ import (
 	"knative.dev/pkg/apis"
 	duckv1 "knative.dev/pkg/apis/duck/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client/kubernetes"
 )
 
 // DeployBroker deploys Knative Broker

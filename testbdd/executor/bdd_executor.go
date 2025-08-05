@@ -27,8 +27,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/testbdd/installers"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/testbdd/steps"
+	"github.com/kubesmarts/operator-bdd-test/testbdd/installers"
+	"github.com/kubesmarts/operator-bdd-test/testbdd/steps"
 
 	"github.com/cucumber/godog"
 	"github.com/cucumber/godog/colors"
@@ -37,11 +37,11 @@ import (
 	olmapiv1alpha1 "github.com/operator-framework/operator-lifecycle-manager/pkg/api/apis/operators/v1alpha1"
 	flag "github.com/spf13/pflag"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/gherkin"
-	frameworkInstallers "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/installers"
-	kogitoSteps "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/steps"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/gherkin"
+	frameworkInstallers "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/installers"
+	kogitoSteps "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/steps"
 )
 
 const (

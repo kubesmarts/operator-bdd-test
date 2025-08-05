@@ -30,9 +30,9 @@ import (
 	duckv1 "knative.dev/pkg/apis/duck/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 )
 
 func workflowAddressableStatusEnricher(ctx context.Context, c client.Client, workflow *operatorapi.SonataFlow) (client.Object, error) {

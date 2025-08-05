@@ -17,8 +17,8 @@ package properties
 import (
 	"testing"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/test"
 	"github.com/stretchr/testify/assert"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

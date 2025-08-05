@@ -25,8 +25,8 @@ import (
 	v1 "k8s.io/api/apps/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	framework "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/operator"
+	framework "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/operator"
 )
 
 const (

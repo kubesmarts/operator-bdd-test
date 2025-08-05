@@ -1,24 +1,24 @@
-module github.com/apache/incubator-kie-kogito-serverless-operator/testbdd
+module github.com/kubesmarts/operator-bdd-test/testbdd
 
 go 1.22.0
 
 toolchain go1.22.4
 
 replace (
-	github.com/apache/incubator-kie-kogito-serverless-operator => ../
-	github.com/apache/incubator-kie-kogito-serverless-operator/api => ../api
-	github.com/apache/incubator-kie-kogito-serverless-operator/bddframework => ../bddframework
-	github.com/apache/incubator-kie-kogito-serverless-operator/container-builder => ../container-builder
-	github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj => ../workflowproj
+	github.com/kubesmarts/operator-bdd-test => ../
+	github.com/kubesmarts/operator-bdd-test/api => ../api
+	github.com/kubesmarts/operator-bdd-test/bddframework => ../bddframework
+	github.com/kubesmarts/operator-bdd-test/container-builder => ../container-builder
+	github.com/kubesmarts/operator-bdd-test/workflowproj => ../workflowproj
 	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring => github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.50.0
 )
 
 require (
-	github.com/apache/incubator-kie-kogito-serverless-operator v0.0.0
-	github.com/apache/incubator-kie-kogito-serverless-operator/api v0.0.0
-	github.com/apache/incubator-kie-kogito-serverless-operator/bddframework v0.0.0
 	github.com/cucumber/godog v0.12.5
 	github.com/cucumber/messages-go/v16 v16.0.1
+	github.com/kubesmarts/operator-bdd-test v0.0.0
+	github.com/kubesmarts/operator-bdd-test/api v0.0.0
+	github.com/kubesmarts/operator-bdd-test/bddframework v0.0.0
 	github.com/openshift/api v0.0.0-20240618205917-987b8890c273
 	github.com/operator-framework/operator-lifecycle-manager v0.0.0-20200321030439-57b580e57e88
 	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.55.1
@@ -35,8 +35,6 @@ require (
 	contrib.go.opencensus.io/exporter/ocagent v0.7.1-0.20200907061046-05415f1de66d // indirect
 	contrib.go.opencensus.io/exporter/prometheus v0.4.2 // indirect
 	github.com/RHsyseng/operator-utils v1.4.13 // indirect
-	github.com/apache/incubator-kie-kogito-serverless-operator/container-builder v0.0.0 // indirect
-	github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj v0.0.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/blendle/zapdriver v1.3.1 // indirect
@@ -82,6 +80,8 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kelseyhightower/envconfig v1.4.0 // indirect
 	github.com/kevinburke/ssh_config v0.0.0-20190725054713-01f96b0aa0cd // indirect
+	github.com/kubesmarts/operator-bdd-test/container-builder v0.0.0 // indirect
+	github.com/kubesmarts/operator-bdd-test/workflowproj v0.0.0 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/machinebox/graphql v0.2.2 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect

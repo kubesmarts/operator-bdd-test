@@ -1,4 +1,4 @@
-module github.com/apache/incubator-kie-kogito-serverless-operator/api
+module github.com/kubesmarts/operator-bdd-test/api
 
 go 1.22.0
 

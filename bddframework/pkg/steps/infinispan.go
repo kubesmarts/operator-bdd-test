@@ -20,13 +20,13 @@
 package steps
 
 import (
-	infinispan "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/infinispan/v1"
+	infinispan "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/infinispan/v1"
 
 	"github.com/cucumber/godog"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/installers"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/steps/mappers"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/installers"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/steps/mappers"
 )
 
 /*

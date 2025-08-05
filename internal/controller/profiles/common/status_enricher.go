@@ -29,8 +29,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/log"
 )
 
 // NewStatusEnricher ...

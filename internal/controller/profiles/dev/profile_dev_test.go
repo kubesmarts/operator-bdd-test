@@ -24,25 +24,25 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
 	"k8s.io/client-go/rest"
 
 	corev1 "k8s.io/api/core/v1"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	kubeutil "github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
+	kubeutil "github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/workflowdef"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 
 	"github.com/stretchr/testify/assert"
 
@@ -50,9 +50,9 @@ import (
 	"k8s.io/apimachinery/pkg/util/intstr"
 	clientruntime "sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/knative"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	"github.com/kubesmarts/operator-bdd-test/api"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/knative"
+	"github.com/kubesmarts/operator-bdd-test/test"
 )
 
 func Test_OverrideStartupProbe(t *testing.T) {

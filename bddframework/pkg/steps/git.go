@@ -24,8 +24,8 @@ import (
 	git "gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
 )
 
 // registerGitSteps register all existing GIT steps

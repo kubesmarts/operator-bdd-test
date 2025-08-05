@@ -22,7 +22,7 @@ package kubernetes
 import (
 	"testing"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client"
 
 	"github.com/stretchr/testify/assert"
 	corev1 "k8s.io/api/core/v1"

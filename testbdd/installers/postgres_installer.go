@@ -20,11 +20,11 @@ import (
 
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/installers"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/workflowdef"
-	srvframework "github.com/apache/incubator-kie-kogito-serverless-operator/testbdd/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/installers"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
+	srvframework "github.com/kubesmarts/operator-bdd-test/testbdd/framework"
 )
 
 const defaultPostgresImage = "docker.io/postgres:13.6"

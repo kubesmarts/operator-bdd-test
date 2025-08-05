@@ -28,8 +28,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test/utils"
+	"github.com/kubesmarts/operator-bdd-test/test"
+	"github.com/kubesmarts/operator-bdd-test/test/utils"
 
 	//nolint:golint
 	//nolint:revive

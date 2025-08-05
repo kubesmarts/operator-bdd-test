@@ -22,8 +22,8 @@ package framework
 import (
 	olmapiv1alpha1 "github.com/operator-framework/operator-lifecycle-manager/pkg/api/apis/operators/v1alpha1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client/kubernetes"
 )
 
 // getSubscription returns subscription or nil if no subscription is found.

@@ -26,7 +26,7 @@ import (
 
 	eventingv1 "knative.dev/eventing/pkg/apis/eventing/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
 )
 
 var (

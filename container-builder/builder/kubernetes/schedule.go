@@ -24,7 +24,7 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/api"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/api"
 )
 
 func newScheduleAction() Action {

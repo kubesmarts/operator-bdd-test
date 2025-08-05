@@ -24,8 +24,8 @@ import (
 
 	"github.com/cucumber/messages-go/v16"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/types"
-	bddtypes "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/types"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/types"
+	bddtypes "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/types"
 )
 
 // *** Whenever you add new parsing functionality here please add corresponding DataTable example to every file in steps which can use the functionality ***

@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
 	"github.com/pkg/errors"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -32,7 +32,7 @@ import (
 	"k8s.io/klog/v2"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	"github.com/kubesmarts/operator-bdd-test/log"
 )
 
 const (

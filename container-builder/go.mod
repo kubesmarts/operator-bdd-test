@@ -1,4 +1,4 @@
-module github.com/apache/incubator-kie-kogito-serverless-operator/container-builder
+module github.com/kubesmarts/operator-bdd-test/container-builder
 
 go 1.22.0
 

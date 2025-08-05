@@ -19,9 +19,9 @@ import (
 
 	"k8s.io/klog/v2"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/knative"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/knative"
+	"github.com/kubesmarts/operator-bdd-test/log"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 

@@ -22,7 +22,7 @@ package v1alpha08
 import (
 	"encoding/json"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"

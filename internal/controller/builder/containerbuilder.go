@@ -22,27 +22,27 @@ package builder
 import (
 	"time"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 
 	corev1 "k8s.io/api/core/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
 	"k8s.io/klog/v2"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/workflowdef"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/rest"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	clientr "github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/client"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	clientr "github.com/kubesmarts/operator-bdd-test/container-builder/client"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/api"
-	builder "github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/builder/kubernetes"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/client"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/api"
+	builder "github.com/kubesmarts/operator-bdd-test/container-builder/builder/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/client"
+	"github.com/kubesmarts/operator-bdd-test/log"
 )
 
 const (

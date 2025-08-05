@@ -39,10 +39,10 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
-	kogitocli "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client/kubernetes"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/meta"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
+	kogitocli "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/meta"
 )
 
 var (

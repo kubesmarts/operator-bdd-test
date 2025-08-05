@@ -30,9 +30,9 @@ import (
 	rbac "k8s.io/api/rbac/v1"
 	apiextensionsv1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	ispn "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/infinispan/v1"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	ispn "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/infinispan/v1"
 )
 
 var (

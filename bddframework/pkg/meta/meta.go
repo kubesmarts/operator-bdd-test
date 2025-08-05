@@ -30,12 +30,12 @@ import (
 	eventing "knative.dev/eventing/pkg/apis/eventing/v1"
 	sources "knative.dev/eventing/pkg/apis/sources/v1"
 
-	hyperfoil "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/api/hyperfoil/v1alpha2"
-	grafana "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/grafana/v1alpha1"
-	infinispan "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/infinispan/v1"
-	kafka "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/kafka/v1beta2"
-	keycloak "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/keycloak/v1alpha1"
-	mongodb "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/mongodb/v1"
+	hyperfoil "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/api/hyperfoil/v1alpha2"
+	grafana "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/grafana/v1alpha1"
+	infinispan "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/infinispan/v1"
+	kafka "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/kafka/v1beta2"
+	keycloak "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/keycloak/v1alpha1"
+	mongodb "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/mongodb/v1"
 
 	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	apiextensionsv1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"

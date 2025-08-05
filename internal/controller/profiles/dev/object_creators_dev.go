@@ -22,18 +22,18 @@ package dev
 import (
 	"path"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/workflowdef"
-	kubeutil "github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
+	kubeutil "github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 )
 
 // serviceCreator is an objectCreator for a basic Service for a workflow using dev profile

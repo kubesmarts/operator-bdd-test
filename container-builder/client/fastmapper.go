@@ -29,7 +29,7 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/util/log"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/util/log"
 )
 
 // FastMapperAllowedAPIGroups contains a set of API groups that are allowed when using the fastmapper.

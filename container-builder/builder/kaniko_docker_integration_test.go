@@ -30,7 +30,7 @@ import (
 	"github.com/stretchr/testify/suite"
 	"k8s.io/klog/v2"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/util/log"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/util/log"
 )
 
 func TestKanikoTestSuite(t *testing.T) {

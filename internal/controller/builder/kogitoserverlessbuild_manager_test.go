@@ -17,10 +17,10 @@ package builder
 import (
 	"testing"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/persistence"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/persistence"
+	"github.com/kubesmarts/operator-bdd-test/test"
 	"github.com/stretchr/testify/assert"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

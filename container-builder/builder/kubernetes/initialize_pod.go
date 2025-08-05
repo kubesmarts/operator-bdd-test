@@ -24,7 +24,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/api"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/api"
 )
 
 func newInitializePodAction() Action {

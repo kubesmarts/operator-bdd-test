@@ -3,7 +3,7 @@
 Tests in this module are a rewrite and enhancement of the end-to-end tests available in the `/test` directory.
 They use [Godog](https://github.com/cucumber/godog) framework which is the official [Cucumber](https://cucumber.io/) BDD framework for Go and use [Gherkin](https://cucumber.io/docs/gherkin/) for writing test scenarios.
 
-Tests also make use of the [BDD Framework](https://github.com/apache/incubator-kie-kogito-serverless-operator/tree/main/bddframework) for Kubernetes which simplifies communication with a Kubernetes cluster. This framework is an extract of the original framework available at [github.com/apache/incubator-kie-kogito-operator](https://github.com/kiegroup/kogito-operator/tree/main/test) and contains numerous functions separated in files depending on their target and functionality.
+Tests also make use of the [BDD Framework](https://github.com/kubesmarts/operator-bdd-test/tree/main/bddframework) for Kubernetes which simplifies communication with a Kubernetes cluster. This framework is an extract of the original framework available at [github.com/apache/incubator-kie-kogito-operator](https://github.com/kiegroup/kogito-operator/tree/main/test) and contains numerous functions separated in files depending on their target and functionality.
 
 ## Run tests
 
@@ -88,7 +88,7 @@ make run-tests 2>&1 | tee log.out
 ```
 $ make
 $ make container-build
-$ podman tag docker.io/apache/incubator-kie-sonataflow-operator:main quay.io/{USERNAME}/incubator-kie-sonataflow-operator:latest
+$ podman tag quay.io/kubesmarts/incubator-kie-sonataflow-operator:main quay.io/{USERNAME}/incubator-kie-sonataflow-operator:latest
 $ podman push quay.io/{USERNAME}/incubator-kie-sonataflow-operator:latest
 $ make run-tests cr_deployment_only=true local_cluster=true operator_image_tag=quay.io/{USERNAME}/incubator-kie-sonataflow-operator:latest
 ```
@@ -108,7 +108,7 @@ All options from BDD tests do also apply here.
 
 #### Running devMode tests
 ```bash
-make run-tests cr_deployment_only=true local_cluster=true show_scenarios=true tags=devMode  namespace_name=my-namespace operator_image_tag=docker.io/apache/incubator-kie-sonataflow-operator:latest
+make run-tests cr_deployment_only=true local_cluster=true show_scenarios=true tags=devMode  namespace_name=my-namespace operator_image_tag=quay.io/kubesmarts/incubator-kie-sonataflow-operator:latest
 ```
 
 If you want to have a more readable format, you can specify the `format=pretty` parameter. You can also specify your own operator image. Namespace is always created automatically, however, you can provide its name as in the command above, otherwise it will be automatically generated.

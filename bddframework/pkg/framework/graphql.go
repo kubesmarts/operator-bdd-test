@@ -29,7 +29,7 @@ import (
 
 	"github.com/machinebox/graphql"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
 )
 
 const graphQLNoAuthToken = ""

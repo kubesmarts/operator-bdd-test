@@ -30,11 +30,11 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api"
+	"github.com/kubesmarts/operator-bdd-test/api"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	"github.com/kubesmarts/operator-bdd-test/test"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 )
 
 func TestSonataFlowController(t *testing.T) {

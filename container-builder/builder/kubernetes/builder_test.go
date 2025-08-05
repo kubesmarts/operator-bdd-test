@@ -31,8 +31,8 @@ import (
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/api"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/util/test"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/api"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/util/test"
 )
 
 func TestNewBuild(t *testing.T) {

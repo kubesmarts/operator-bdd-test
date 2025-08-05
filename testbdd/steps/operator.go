@@ -24,11 +24,11 @@ import (
 
 	"github.com/cucumber/godog"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/testbdd/installers"
+	"github.com/kubesmarts/operator-bdd-test/testbdd/installers"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	kogitoInstallers "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/installers"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	kogitoInstallers "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/installers"
 )
 
 func registerOperatorSteps(ctx *godog.ScenarioContext, data *Data) {

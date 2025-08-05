@@ -25,8 +25,8 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client/kubernetes"
-	grafanav1 "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/grafana/v1alpha1"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client/kubernetes"
+	grafanav1 "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/grafana/v1alpha1"
 )
 
 const (

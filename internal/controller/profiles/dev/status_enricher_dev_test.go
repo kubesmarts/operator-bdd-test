@@ -28,10 +28,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"knative.dev/pkg/apis"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common"
 
-	apiv08 "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	apiv08 "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/test"
 )
 
 func Test_enrichmentStatusOnK8s(t *testing.T) {

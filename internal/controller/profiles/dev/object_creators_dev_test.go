@@ -25,7 +25,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	v1 "k8s.io/api/core/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	"github.com/kubesmarts/operator-bdd-test/test"
 )
 
 func Test_ensureWorkflowDevServiceIsExposed(t *testing.T) {

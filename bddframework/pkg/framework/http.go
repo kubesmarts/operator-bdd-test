@@ -31,7 +31,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
 )
 
 type (

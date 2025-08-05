@@ -15,7 +15,7 @@
 package variables
 
 import (
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
 	"k8s.io/apimachinery/pkg/util/intstr"
 )
 

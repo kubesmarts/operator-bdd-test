@@ -23,8 +23,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/knative"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/knative"
+	"github.com/kubesmarts/operator-bdd-test/log"
 	"k8s.io/client-go/rest"
 	"k8s.io/klog/v2"
 

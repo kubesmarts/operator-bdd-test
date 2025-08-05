@@ -20,7 +20,7 @@
 package main
 
 import (
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
 )
 
 func main() {

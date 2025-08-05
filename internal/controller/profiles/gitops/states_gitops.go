@@ -20,10 +20,10 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api"
+	"github.com/kubesmarts/operator-bdd-test/api"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common"
 )
 
 type ensureBuildSkipped struct {

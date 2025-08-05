@@ -24,13 +24,13 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/util/retry"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 	ctrl "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

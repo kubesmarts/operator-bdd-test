@@ -32,14 +32,14 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api"
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/workflowdef"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
-	kubeutil "github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/api"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
+	"github.com/kubesmarts/operator-bdd-test/log"
+	kubeutil "github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
 )
 
 const (

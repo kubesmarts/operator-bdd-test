@@ -26,11 +26,11 @@ import (
 
 	"github.com/cucumber/godog"
 
-	framework "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test/utils"
+	framework "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/test"
+	"github.com/kubesmarts/operator-bdd-test/test/utils"
 
-	//"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	//"github.com/kubesmarts/operator-bdd-test/test"
 	"os"
 )
 

@@ -23,9 +23,9 @@ import (
 	v1 "github.com/openshift/api/route/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 )
 
 func RouteForWorkflow(workflow *operatorapi.SonataFlow) (*v1.Route, error) {

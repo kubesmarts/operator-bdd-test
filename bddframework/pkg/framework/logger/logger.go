@@ -31,7 +31,7 @@ import (
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 	logzap "sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/env"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/env"
 )
 
 var (

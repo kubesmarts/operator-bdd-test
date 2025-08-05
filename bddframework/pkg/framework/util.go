@@ -33,11 +33,11 @@ import (
 	"github.com/google/uuid"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/env"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/env"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/api"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/version"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/api"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/version"
 )
 
 const (

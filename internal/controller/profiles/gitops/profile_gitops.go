@@ -15,10 +15,10 @@
 package gitops
 
 import (
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/discovery"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/discovery"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/record"
 	"sigs.k8s.io/controller-runtime/pkg/client"

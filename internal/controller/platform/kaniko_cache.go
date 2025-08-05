@@ -22,14 +22,14 @@ package platform
 import (
 	"context"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
 	"github.com/pkg/errors"
 	corev1 "k8s.io/api/core/v1"
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	v08 "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/client"
+	v08 "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/client"
 )
 
 // kanikoCacheDir is the cache directory for Kaniko builds (mounted into the Kaniko pod).

@@ -25,7 +25,7 @@ import (
 	"github.com/RHsyseng/operator-utils/pkg/resource/write"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	kogitocli "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client"
+	kogitocli "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client"
 )
 
 // ResourceWriter interface to write kubernetes object

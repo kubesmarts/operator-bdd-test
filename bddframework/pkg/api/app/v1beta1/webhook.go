@@ -19,7 +19,7 @@
 
 package v1beta1
 
-import "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/api"
+import "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/api"
 
 // WebHookSecret Secret to use for a given webHook.
 // +k8s:openapi-gen=true

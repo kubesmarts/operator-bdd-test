@@ -23,20 +23,20 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/persistence"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/persistence"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/discovery"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform/services"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/discovery"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform/services"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
 
 	"github.com/magiconair/properties"
 
 	"k8s.io/klog/v2"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/log"
 )
 
 var (

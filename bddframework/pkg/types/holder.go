@@ -20,7 +20,7 @@
 package types
 
 import (
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/api"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/api"
 )
 
 // KogitoServiceHolder Helper structure holding informations which are not available in KogitoService

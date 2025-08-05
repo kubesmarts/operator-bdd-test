@@ -27,7 +27,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client"
 )
 
 // NamespaceInterface has functions that interacts with namespace object in the Kubernetes cluster

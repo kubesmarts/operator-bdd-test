@@ -26,10 +26,10 @@ import (
 
 	corev1 "k8s.io/api/core/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/api"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/client"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/util/minikube"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/util/registry"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/api"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/client"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/util/minikube"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/util/registry"
 )
 
 var (

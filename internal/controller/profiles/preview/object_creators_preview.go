@@ -28,13 +28,13 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
-	kubeutil "github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
+	kubeutil "github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 )
 
 const (

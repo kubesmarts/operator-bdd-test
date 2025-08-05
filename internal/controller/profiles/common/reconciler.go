@@ -25,9 +25,9 @@ import (
 
 	"k8s.io/client-go/rest"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/discovery"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform/services"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/discovery"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform/services"
 
 	"k8s.io/client-go/tools/record"
 
@@ -35,9 +35,9 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles"
+	"github.com/kubesmarts/operator-bdd-test/log"
 )
 
 // StateSupport is the shared structure with common accessors used throughout the whole reconciliation profiles

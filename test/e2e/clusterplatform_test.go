@@ -25,11 +25,11 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform/services"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test/utils"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform/services"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/test"
+	"github.com/kubesmarts/operator-bdd-test/test/utils"
 
 	//nolint:golint
 	//nolint:revive

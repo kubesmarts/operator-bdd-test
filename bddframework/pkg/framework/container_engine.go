@@ -19,7 +19,7 @@
 
 package framework
 
-import "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
+import "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
 
 const (
 	defaultRetryNb = 3

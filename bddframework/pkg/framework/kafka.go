@@ -24,9 +24,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client/kubernetes"
-	infrastructure "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/kafka/v1beta2"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client/kubernetes"
+	infrastructure "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/kafka/v1beta2"
 
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

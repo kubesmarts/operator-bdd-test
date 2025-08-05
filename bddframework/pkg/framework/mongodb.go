@@ -24,15 +24,15 @@ import (
 
 	v1 "k8s.io/api/apps/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/operator"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/meta"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/operator"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/meta"
 
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client/kubernetes"
-	mongodb "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/mongodb/v1"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client/kubernetes"
+	mongodb "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/mongodb/v1"
 )
 
 const (

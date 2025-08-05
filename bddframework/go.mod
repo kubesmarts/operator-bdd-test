@@ -1,11 +1,11 @@
-module github.com/apache/incubator-kie-kogito-serverless-operator/bddframework
+module github.com/kubesmarts/operator-bdd-test/bddframework
 
 go 1.22.0
 
 toolchain go1.22.4
 
 // Internal dependencies
-replace github.com/apache/incubator-kie-kogito-serverless-operator => ../
+replace github.com/kubesmarts/operator-bdd-test => ../
 
 require (
 	github.com/cucumber/gherkin-go/v19 v19.0.3
@@ -33,8 +33,8 @@ require (
 
 require (
 	github.com/RHsyseng/operator-utils v1.4.13
-	github.com/apache/incubator-kie-kogito-serverless-operator v0.0.0
 	github.com/google/uuid v1.6.0
+	github.com/kubesmarts/operator-bdd-test v0.0.0
 	github.com/openshift/client-go v0.0.0-20240528061634-b054aa794d87
 	github.com/stretchr/testify v1.9.0
 )

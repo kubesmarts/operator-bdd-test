@@ -23,8 +23,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 	"github.com/magiconair/properties"
 	"github.com/serverlessworkflow/sdk-go/v2/model"
 	"github.com/stretchr/testify/assert"

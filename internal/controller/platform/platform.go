@@ -32,12 +32,12 @@ import (
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
 	ctrl "sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	"github.com/kubesmarts/operator-bdd-test/log"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 )
 
 const (

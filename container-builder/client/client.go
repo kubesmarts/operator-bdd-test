@@ -35,7 +35,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client/config"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/util/log"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/util/log"
 )
 
 const (

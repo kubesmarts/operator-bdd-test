@@ -22,9 +22,9 @@ package main
 import (
 	"testing"
 
-	framework "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/testbdd/executor"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/testbdd/meta"
+	framework "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/testbdd/executor"
+	"github.com/kubesmarts/operator-bdd-test/testbdd/meta"
 )
 
 func TestMain(m *testing.M) {

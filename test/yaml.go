@@ -27,10 +27,10 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api"
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/kubesmarts/operator-bdd-test/api"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/log"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/yaml"

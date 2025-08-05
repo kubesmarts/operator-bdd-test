@@ -1,4 +1,4 @@
-module github.com/apache/incubator-kie-kogito-serverless-operator
+module github.com/kubesmarts/operator-bdd-test
 
 go 1.22.0
 
@@ -6,17 +6,17 @@ toolchain go1.22.4
 
 // Internal dependencies
 replace (
-	github.com/apache/incubator-kie-kogito-serverless-operator/api => ./api
-	github.com/apache/incubator-kie-kogito-serverless-operator/container-builder => ./container-builder
-	github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj => ./workflowproj
+	github.com/kubesmarts/operator-bdd-test/api => ./api
+	github.com/kubesmarts/operator-bdd-test/container-builder => ./container-builder
+	github.com/kubesmarts/operator-bdd-test/workflowproj => ./workflowproj
 )
 
 // Direct dependencies (please keep organized, no indirects)
 require (
-	github.com/apache/incubator-kie-kogito-serverless-operator/api v0.0.0
-	github.com/apache/incubator-kie-kogito-serverless-operator/container-builder v0.0.0
-	github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj v0.0.0
 	github.com/go-logr/logr v1.4.2 // indirect
+	github.com/kubesmarts/operator-bdd-test/api v0.0.0
+	github.com/kubesmarts/operator-bdd-test/container-builder v0.0.0
+	github.com/kubesmarts/operator-bdd-test/workflowproj v0.0.0
 	github.com/magiconair/properties v1.8.7
 	github.com/onsi/ginkgo/v2 v2.17.1
 	github.com/onsi/gomega v1.32.0

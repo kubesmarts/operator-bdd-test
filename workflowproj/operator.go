@@ -26,8 +26,8 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 )
 
 const (

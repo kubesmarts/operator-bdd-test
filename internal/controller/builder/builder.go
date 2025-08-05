@@ -29,9 +29,9 @@ import (
 	"k8s.io/client-go/rest"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform"
+	"github.com/kubesmarts/operator-bdd-test/log"
 )
 
 type buildManagerContext struct {

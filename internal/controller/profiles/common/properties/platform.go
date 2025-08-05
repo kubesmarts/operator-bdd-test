@@ -17,9 +17,9 @@ package properties
 import (
 	"context"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/log"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 	"github.com/magiconair/properties"
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"

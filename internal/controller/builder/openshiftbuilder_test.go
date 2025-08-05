@@ -23,7 +23,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform"
 	buildv1 "github.com/openshift/api/build/v1"
 	imgv1 "github.com/openshift/api/image/v1"
 	buildfake "github.com/openshift/client-go/build/clientset/versioned/fake"
@@ -32,9 +32,9 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/workflowdef"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
+	"github.com/kubesmarts/operator-bdd-test/test"
 )
 
 func Test_openshiftBuilderManager_Reconcile(t *testing.T) {

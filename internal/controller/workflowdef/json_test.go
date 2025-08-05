@@ -26,9 +26,9 @@ import (
 	"github.com/serverlessworkflow/sdk-go/v2/model"
 	"github.com/stretchr/testify/assert"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	"github.com/kubesmarts/operator-bdd-test/test"
 )
 
 func TestSonataFlowConverter(t *testing.T) {

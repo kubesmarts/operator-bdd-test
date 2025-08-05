@@ -22,9 +22,9 @@ package clusterplatform
 import (
 	"context"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/client"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/client"
 
-	v08 "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	v08 "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 )
 
 // Action --.

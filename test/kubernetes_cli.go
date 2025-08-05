@@ -24,7 +24,7 @@ import (
 
 	"testing"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 	eventingv1 "knative.dev/eventing/pkg/apis/eventing/v1"
 	sourcesv1 "knative.dev/eventing/pkg/apis/sources/v1"
 	servingv1 "knative.dev/serving/pkg/apis/serving/v1"
@@ -43,7 +43,7 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/client/fake"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 )
 
 func NewFakeRecorder() record.EventRecorder {

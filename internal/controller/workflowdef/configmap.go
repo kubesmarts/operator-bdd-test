@@ -23,16 +23,16 @@ import (
 	"context"
 	"path"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 )
 
 const KogitoWorkflowJSONFileExt = ".sw.json"

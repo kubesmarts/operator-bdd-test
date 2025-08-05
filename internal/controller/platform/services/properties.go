@@ -26,13 +26,13 @@ import (
 
 	"k8s.io/klog/v2"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/knative"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/workflowdef"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/knative"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
+	"github.com/kubesmarts/operator-bdd-test/log"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 
 	"github.com/magiconair/properties"
 )

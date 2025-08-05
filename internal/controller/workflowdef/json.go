@@ -23,11 +23,11 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	"github.com/kubesmarts/operator-bdd-test/log"
 
 	"k8s.io/klog/v2"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 )
 
 // GetJSONWorkflow return a Kogito compliant JSON format workflow as bytearray give a specific workflow CR

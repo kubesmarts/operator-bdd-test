@@ -22,8 +22,8 @@ package installers
 import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	hyperfoil "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/api/hyperfoil/v1alpha2"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
+	hyperfoil "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/api/hyperfoil/v1alpha2"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
 )
 
 var (

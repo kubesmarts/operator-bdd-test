@@ -16,7 +16,7 @@
 package v1alpha08
 
 import (
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api"
+	"github.com/kubesmarts/operator-bdd-test/api"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 

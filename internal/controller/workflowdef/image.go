@@ -22,9 +22,9 @@ package workflowdef
 import (
 	"fmt"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/version"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/version"
 )
 
 const (

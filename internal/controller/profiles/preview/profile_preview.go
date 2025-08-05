@@ -22,17 +22,17 @@ package preview
 import (
 	"time"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 	"k8s.io/client-go/rest"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/discovery"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/discovery"
 	"k8s.io/client-go/tools/record"
 
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common"
 )
 
 var _ profiles.ProfileReconciler = &previewProfile{}

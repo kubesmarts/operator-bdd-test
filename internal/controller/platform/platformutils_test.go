@@ -24,13 +24,13 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	"github.com/kubesmarts/operator-bdd-test/test"
 )
 
 const dockerFile = "FROM docker.io/apache/default-test-kie-sonataflow-builder:main AS builder\n\n# ETC, \n\n# ETC, \n\n# ETC"

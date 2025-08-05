@@ -22,10 +22,10 @@ package framework
 import (
 	"fmt"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/operator"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/meta"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/operator"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/meta"
 
 	"gopkg.in/yaml.v2"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -33,8 +33,8 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client/kubernetes"
-	infinispan "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/infinispan/v1"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client/kubernetes"
+	infinispan "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/infinispan/v1"
 )
 
 // DeployInfinispanInstance deploys an instance of Infinispan

@@ -20,17 +20,17 @@
 package dev
 
 import (
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/discovery"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/discovery"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/record"
 	"k8s.io/klog/v2"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common"
+	"github.com/kubesmarts/operator-bdd-test/log"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 )
 
 var _ profiles.ProfileReconciler = &developmentProfile{}

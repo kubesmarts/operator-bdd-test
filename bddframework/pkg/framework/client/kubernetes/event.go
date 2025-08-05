@@ -25,7 +25,7 @@ import (
 	v1beta1 "k8s.io/api/events/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client"
 )
 
 // EventInterface has functions that interacts with pod object in the Kubernetes cluster

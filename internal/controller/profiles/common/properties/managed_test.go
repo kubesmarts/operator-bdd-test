@@ -27,17 +27,17 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/discovery"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform/services"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/discovery"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform/services"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
 
 	"github.com/magiconair/properties"
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
+	"github.com/kubesmarts/operator-bdd-test/test"
 )
 
 const (

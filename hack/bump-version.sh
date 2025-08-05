@@ -20,7 +20,7 @@ set -e
 script_dir_path=$(dirname "${BASH_SOURCE[0]}")
 source "${script_dir_path}"/env.sh
 
-imageTag='docker.io/apache/incubator-kie-sonataflow-operator'
+imageTag='quay.io/kubesmarts/incubator-kie-sonataflow-operator'
 # shellcheck disable=SC2034
 old_version=$(getImageTagVersion)
 old_operator_version=$(getOperatorVersion)

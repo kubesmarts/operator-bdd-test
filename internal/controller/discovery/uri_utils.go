@@ -23,7 +23,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
 	corev1 "k8s.io/api/core/v1"
 )
 

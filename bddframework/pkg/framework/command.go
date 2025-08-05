@@ -24,7 +24,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/logger"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/logger"
 )
 
 var (

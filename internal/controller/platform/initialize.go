@@ -22,7 +22,7 @@ package platform
 import (
 	"context"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
 	"k8s.io/klog/v2"
 
 	corev1 "k8s.io/api/core/v1"
@@ -30,14 +30,14 @@ import (
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api"
+	"github.com/kubesmarts/operator-bdd-test/api"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/client"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/client"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/log"
 )
 
 const (

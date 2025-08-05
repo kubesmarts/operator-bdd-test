@@ -17,7 +17,7 @@ package test
 import (
 	"testing"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
 	"github.com/stretchr/testify/assert"
 )
 

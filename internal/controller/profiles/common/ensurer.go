@@ -22,9 +22,9 @@ package common
 import (
 	"context"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/log"
 	"k8s.io/klog/v2"
 	eventingv1 "knative.dev/eventing/pkg/apis/eventing/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"

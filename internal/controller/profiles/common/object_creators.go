@@ -24,9 +24,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/workflowdef"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
 	servingv1 "knative.dev/serving/pkg/apis/serving/v1"
 
 	cncfmodel "github.com/serverlessworkflow/sdk-go/v2/model"
@@ -44,17 +44,17 @@ import (
 	"knative.dev/pkg/tracker"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/knative"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform/services"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/persistence"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/properties"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/variables"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
-	kubeutil "github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils/openshift"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/knative"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform/services"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/persistence"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/properties"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/variables"
+	"github.com/kubesmarts/operator-bdd-test/utils"
+	kubeutil "github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/utils/openshift"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 )
 
 const (

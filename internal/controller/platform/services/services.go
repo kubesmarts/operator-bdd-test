@@ -22,11 +22,11 @@ package services
 import (
 	"fmt"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/knative"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
 	"github.com/imdario/mergo"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/knative"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles"
+	"github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
 	"github.com/magiconair/properties"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
@@ -40,10 +40,10 @@ import (
 	"knative.dev/pkg/tracker"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/persistence"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/version"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/persistence"
+	"github.com/kubesmarts/operator-bdd-test/version"
 )
 
 const (

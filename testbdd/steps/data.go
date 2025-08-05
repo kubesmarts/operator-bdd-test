@@ -25,8 +25,8 @@ import (
 
 	"github.com/cucumber/godog"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	sonataFlowSteps "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/steps"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	sonataFlowSteps "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/steps"
 )
 
 // Data contains all data needed by Gherkin steps to run

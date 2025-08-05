@@ -23,17 +23,17 @@ import (
 	"context"
 	"strings"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/persistence"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/persistence"
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 )
 
 const QuarkusExtensionsBuildArg = "QUARKUS_EXTENSIONS"

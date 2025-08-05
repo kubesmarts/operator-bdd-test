@@ -30,7 +30,7 @@ import (
 
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
 	"github.com/stretchr/testify/assert"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/kubernetes/scheme"

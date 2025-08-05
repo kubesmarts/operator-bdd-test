@@ -24,7 +24,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
 )
 
 const (

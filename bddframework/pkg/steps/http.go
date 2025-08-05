@@ -26,7 +26,7 @@ import (
 
 	"github.com/cucumber/godog"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
 )
 
 func registerHTTPSteps(ctx *godog.ScenarioContext, data *Data) {

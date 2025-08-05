@@ -23,7 +23,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
 	"github.com/magiconair/properties"
 	"github.com/stretchr/testify/assert"
 	appsv1 "k8s.io/api/apps/v1"
@@ -35,12 +35,12 @@ import (
 	"knative.dev/pkg/kmeta"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
-	kubeutil "github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
+	"github.com/kubesmarts/operator-bdd-test/utils"
+	kubeutil "github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/test"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 )
 
 const platformName = "test-platform"

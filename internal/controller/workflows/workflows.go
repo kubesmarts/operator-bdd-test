@@ -17,8 +17,8 @@ package workflows
 import (
 	"context"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/api"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )

@@ -20,8 +20,8 @@
 package infrastructure
 
 import (
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/keycloak/v1alpha1"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/operator"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/keycloak/v1alpha1"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/operator"
 )
 
 const (

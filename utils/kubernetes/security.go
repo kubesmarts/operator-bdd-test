@@ -22,7 +22,7 @@ package kubernetes
 import (
 	corev1 "k8s.io/api/core/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 )
 
 func SecurityDefaults() *corev1.SecurityContext {

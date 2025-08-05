@@ -25,9 +25,9 @@ import (
 	"regexp"
 	"strings"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/discovery"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/discovery"
+	"github.com/kubesmarts/operator-bdd-test/log"
 	"github.com/magiconair/properties"
 	"k8s.io/klog/v2"
 )

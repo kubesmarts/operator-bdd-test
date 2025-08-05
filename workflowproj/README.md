@@ -8,7 +8,7 @@ the operator.
 Add this module to your project's dependencies:
 
 ```shell
-go get github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj
+go get github.com/kubesmarts/operator-bdd-test/workflowproj
 ```
 
 Then you should have access to the main entry point of this package, which is the workflow project handler builder.
@@ -21,7 +21,7 @@ package main
 import (
 	"os"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 )
 
 func Main() {

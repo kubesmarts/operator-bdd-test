@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
 	"github.com/imdario/mergo"
+	"github.com/kubesmarts/operator-bdd-test/log"
 	"k8s.io/apimachinery/pkg/util/yaml"
 	"k8s.io/klog/v2"
 )

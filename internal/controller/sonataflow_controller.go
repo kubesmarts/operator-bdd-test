@@ -23,15 +23,15 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/knative"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/knative"
 	sourcesv1 "knative.dev/eventing/pkg/apis/sources/v1"
 	servingv1 "knative.dev/serving/pkg/apis/serving/v1"
 
 	"k8s.io/klog/v2"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
-	profiles "github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/factory"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
+	profiles "github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/factory"
 
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
@@ -50,11 +50,11 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
+	"github.com/kubesmarts/operator-bdd-test/api"
+	"github.com/kubesmarts/operator-bdd-test/log"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform"
 )
 
 // SonataFlowReconciler reconciles a SonataFlow object
@@ -117,7 +117,7 @@ func (r *SonataFlowReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 	return profiles.NewReconciler(r.Client, r.Config, r.Recorder, workflow).Reconcile(ctx, workflow)
 }
 
-// TODO: move to webhook see https://github.com/apache/incubator-kie-kogito-serverless-operator/pull/239
+// TODO: move to webhook see https://github.com/kubesmarts/operator-bdd-test/pull/239
 func (r *SonataFlowReconciler) setDefaults(workflow *operatorapi.SonataFlow) {
 	if workflow.Annotations == nil {
 		workflow.Annotations = map[string]string{}

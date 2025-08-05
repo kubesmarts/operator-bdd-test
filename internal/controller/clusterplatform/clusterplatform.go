@@ -22,10 +22,10 @@ package clusterplatform
 import (
 	"context"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/metadata"
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	"github.com/kubesmarts/operator-bdd-test/api/metadata"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/log"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/klog/v2"
 )

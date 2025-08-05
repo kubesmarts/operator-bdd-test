@@ -34,8 +34,8 @@ import (
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/util"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/util/log"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/util"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/util/log"
 )
 
 type Docker struct {

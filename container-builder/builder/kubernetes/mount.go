@@ -33,7 +33,7 @@ import (
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/container-builder/api"
+	"github.com/kubesmarts/operator-bdd-test/container-builder/api"
 )
 
 type configMapVolumeBuildContext struct {

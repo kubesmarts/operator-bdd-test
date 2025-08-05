@@ -25,9 +25,9 @@ import (
 
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/openshift"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/log"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/openshift"
+	"github.com/kubesmarts/operator-bdd-test/log"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 	appsv1 "github.com/openshift/client-go/apps/clientset/versioned/typed/apps/v1"
 	routev1 "github.com/openshift/client-go/route/clientset/versioned/typed/route/v1"
 

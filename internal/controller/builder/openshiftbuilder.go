@@ -23,7 +23,7 @@ import (
 	"context"
 	"strings"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/openshift"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/openshift"
 
 	buildv1 "github.com/openshift/api/build/v1"
 	imgv1 "github.com/openshift/api/image/v1"
@@ -36,15 +36,15 @@ import (
 	"k8s.io/client-go/rest"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/platform"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/workflowproj"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/platform"
+	"github.com/kubesmarts/operator-bdd-test/workflowproj"
 
-	kubeutil "github.com/apache/incubator-kie-kogito-serverless-operator/utils/kubernetes"
+	kubeutil "github.com/kubesmarts/operator-bdd-test/utils/kubernetes"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/workflowdef"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/utils"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
+	"github.com/kubesmarts/operator-bdd-test/utils"
 
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
 )
 
 const (

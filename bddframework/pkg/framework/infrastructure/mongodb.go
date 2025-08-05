@@ -24,9 +24,9 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client/kubernetes"
-	mongodb "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/infrastructure/mongodb/v1"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/operator"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client/kubernetes"
+	mongodb "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/mongodb/v1"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/operator"
 )
 
 const (

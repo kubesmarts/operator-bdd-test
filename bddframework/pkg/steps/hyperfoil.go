@@ -27,10 +27,10 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	hyperfoilv1alpha2 "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/api/hyperfoil/v1alpha2"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/config"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/installers"
+	hyperfoilv1alpha2 "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/api/hyperfoil/v1alpha2"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/installers"
 )
 
 const (

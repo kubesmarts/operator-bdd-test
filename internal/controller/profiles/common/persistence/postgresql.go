@@ -17,13 +17,13 @@ package persistence
 import (
 	"fmt"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/cfg"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles"
 	"github.com/magiconair/properties"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	operatorapi "github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/internal/controller/profiles/common/constants"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/internal/controller/profiles/common/constants"
 	corev1 "k8s.io/api/core/v1"
 )
 

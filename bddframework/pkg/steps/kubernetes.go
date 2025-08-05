@@ -23,8 +23,8 @@ import (
 	"github.com/cucumber/godog"
 	v1 "k8s.io/api/core/v1"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/steps/mappers"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/steps/mappers"
 )
 
 /*

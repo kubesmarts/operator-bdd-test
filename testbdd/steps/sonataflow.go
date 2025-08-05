@@ -29,11 +29,11 @@ import (
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/api/v1alpha08"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test"
-	"github.com/apache/incubator-kie-kogito-serverless-operator/test/utils"
+	"github.com/kubesmarts/operator-bdd-test/api"
+	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
+	"github.com/kubesmarts/operator-bdd-test/test"
+	"github.com/kubesmarts/operator-bdd-test/test/utils"
 )
 
 func registerSonataFlowSteps(ctx *godog.ScenarioContext, data *Data) {

@@ -29,7 +29,7 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	kogitocli "github.com/apache/incubator-kie-kogito-serverless-operator/bddframework/pkg/framework/client"
+	kogitocli "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/client"
 )
 
 // ResourceReader interface to read kubernetes object
