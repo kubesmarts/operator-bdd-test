@@ -13,11 +13,11 @@
 // limitations under the License.
 
 package test
-
+/*
 import (
 	"testing"
 
-	"github.com/kubesmarts/operator-bdd-test/internal/controller/cfg"
+	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/internal/controller/cfg"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -28,3 +28,4 @@ func RestoreControllersConfig(t *testing.T) {
 	_, err := cfg.InitializeControllersCfgAt(getProjectDir() + "/config/manager/controllers_cfg.yaml")
 	assert.NoError(t, err)
 }
+*/

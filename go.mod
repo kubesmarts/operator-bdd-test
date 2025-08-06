@@ -1,22 +1,23 @@
 module github.com/kubesmarts/operator-bdd-test
 
-go 1.22.0
+go 1.23.0
 
 toolchain go1.22.4
 
 // Internal dependencies
 replace (
-	github.com/kubesmarts/operator-bdd-test/api => ./api
-	github.com/kubesmarts/operator-bdd-test/container-builder => ./container-builder
-	github.com/kubesmarts/operator-bdd-test/workflowproj => ./workflowproj
+	github.com/kubesmarts/operator-bdd-test/bddframework => ./bddframework
+	github.com/kubesmarts/operator-bdd-test/testbdd => ./testbdd
+    github.com/kubesmarts/operator-bdd-test/test => ./test
 )
 
 // Direct dependencies (please keep organized, no indirects)
 require (
+    github.com/apache/incubator-kie-tools/packages/sonataflow-operator v0.0.0-20250801193154-43d4e5aa97c1
+	github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api v0.0.0-20250725185541-7eb52c9b9f3f
+	github.com/apache/incubator-kie-tools/packages/sonataflow-operator/container-builder v0.0.0-20250801193154-43d4e5aa97c1  
+	github.com/apache/incubator-kie-tools/packages/sonataflow-operator/workflowproj v0.0.0-20250801193154-43d4e5aa97c1 
 	github.com/go-logr/logr v1.4.2 // indirect
-	github.com/kubesmarts/operator-bdd-test/api v0.0.0
-	github.com/kubesmarts/operator-bdd-test/container-builder v0.0.0
-	github.com/kubesmarts/operator-bdd-test/workflowproj v0.0.0
 	github.com/magiconair/properties v1.8.7
 	github.com/onsi/ginkgo/v2 v2.17.1
 	github.com/onsi/gomega v1.32.0
@@ -24,15 +25,8 @@ require (
 	github.com/openshift/client-go v0.0.0-20240528061634-b054aa794d87
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.55.1
-	github.com/serverlessworkflow/sdk-go/v2 v2.2.5
+	github.com/serverlessworkflow/sdk-go/v2 v2.5.0
 	github.com/stretchr/testify v1.9.0
-	k8s.io/api v0.30.1
-	k8s.io/apimachinery v0.30.1
-	k8s.io/client-go v0.30.1
-	knative.dev/pkg v0.0.0-20231023151236-29775d7c9e5c
-	knative.dev/serving v0.39.0
-	sigs.k8s.io/controller-runtime v0.18.2
-	sigs.k8s.io/yaml v1.3.0
 )
 
 require (
@@ -40,7 +34,7 @@ require (
 	github.com/imdario/mergo v0.3.16
 	k8s.io/klog/v2 v2.120.1
 	k8s.io/utils v0.0.0-20230726121419-3b25d923346b
-	knative.dev/eventing v0.26.0
+	knative.dev/eventing v0.39.4
 )
 
 require (

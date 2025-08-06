@@ -35,9 +35,9 @@ import (
 
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/env"
 
+	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api/version"
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/api"
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
-	"github.com/kubesmarts/operator-bdd-test/version"
 )
 
 const (
@@ -292,7 +292,7 @@ func AppendImageDefaultValues(image *api.Image) {
 	}
 
 	if len(image.Tag) == 0 {
-		image.Tag = GetKogitoImageVersion(version.GetTagVersion())
+		image.Tag = GetKogitoImageVersion(version.GetImageTagVersion())
 	}
 }
 

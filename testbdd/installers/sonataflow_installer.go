@@ -29,7 +29,6 @@ import (
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/installers"
-	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
 	srvframework "github.com/kubesmarts/operator-bdd-test/testbdd/framework"
 )
 
@@ -103,7 +102,7 @@ func installSonataFlowUsingYaml() error {
 		return err
 	}
 
-	regexp, err := regexp.Compile(getDefaultOperatorImageTag())
+	regexp, err := regexp.Compile("main")
 	if err != nil {
 		return err
 	}
@@ -194,6 +193,10 @@ func cleanupSonataFlowCrsInNamespace(namespace string) bool {
 	return true
 }
 
-func getDefaultOperatorImageTag() string {
-	return workflowdef.GetDefaultImageTag(defaultOperatorImage)
-}
+/*
+Commenting this to get rid of dependency on internal module - github.com/apache/incubator-kie-tools/packages/sonataflow-operator/internal/controller/workflowdef
+
+	func getDefaultPostgresImageTag() string {
+		return workflowdef.GetDefaultImageTag(defaultPostgresImage)
+	}
+*/

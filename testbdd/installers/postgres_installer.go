@@ -15,7 +15,7 @@
 package installers
 
 import (
-	"errors"
+	//"errors"
 	"fmt"
 
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -23,7 +23,6 @@ import (
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/installers"
-	"github.com/kubesmarts/operator-bdd-test/internal/controller/workflowdef"
 	srvframework "github.com/kubesmarts/operator-bdd-test/testbdd/framework"
 )
 
@@ -60,18 +59,10 @@ var (
 
 // GetPostgresInstaller returns Postgres installer
 func GetPostgresInstaller() (installers.ServiceInstaller, error) {
-	// If user doesn't pass Postgres operator image then use community OLM catalog to install operator
-	if len(config.GetOperatorImageTag()) == 0 {
-		framework.GetMainLogger().Info("Installing Postgres operator using community catalog.")
-		return &postgresOlmClusterWideInstaller, nil
-	}
+	framework.GetMainLogger().Info("Installing Postgres operator using YAML.")
+	return &postgresYamlClusterInstaller, nil
 
-	if config.IsOperatorInstalledByYaml() || config.IsOperatorProfiling() {
-		framework.GetMainLogger().Info("Installing Postgres operator using YAML.")
-		return &postgresYamlClusterInstaller, nil
-	}
-
-	return nil, errors.New("no Postgres operator installer available for provided configuration")
+	//return nil, errors.New("no Postgres operator installer available for provided configuration")
 }
 
 func installPostgresUsingYaml(namespace string) error {
@@ -146,6 +137,10 @@ func cleanupPostgresCrsInNamespace(namespace string) bool {
 	return true
 }
 
-func getDefaultPostgresImageTag() string {
-	return workflowdef.GetDefaultImageTag(defaultPostgresImage)
-}
+/*
+Commenting this to get rid of dependency on internal module - github.com/apache/incubator-kie-tools/packages/sonataflow-operator/internal/controller/workflowdef
+
+	func getDefaultPostgresImageTag() string {
+		return workflowdef.GetDefaultImageTag(defaultPostgresImage)
+	}
+*/

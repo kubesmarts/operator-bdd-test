@@ -27,10 +27,10 @@ import (
 	"runtime"
 	"strings"
 
+	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api"
+	operatorapi "github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api/v1alpha08"
 	"github.com/davecgh/go-spew/spew"
-	"github.com/kubesmarts/operator-bdd-test/api"
-	operatorapi "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
-	"github.com/kubesmarts/operator-bdd-test/log"
+	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/log"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/yaml"

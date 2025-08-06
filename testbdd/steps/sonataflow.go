@@ -29,8 +29,8 @@ import (
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/kubesmarts/operator-bdd-test/api"
-	"github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api"
+	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api/v1alpha08"
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
 	"github.com/kubesmarts/operator-bdd-test/test"
 	"github.com/kubesmarts/operator-bdd-test/test/utils"

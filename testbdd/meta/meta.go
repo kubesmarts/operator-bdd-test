@@ -30,7 +30,7 @@ import (
 	eventing "knative.dev/eventing/pkg/apis/eventing/v1"
 	sources "knative.dev/eventing/pkg/apis/sources/v1"
 
-	sonata "github.com/kubesmarts/operator-bdd-test/api/v1alpha08"
+	sonata "github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api/v1alpha08"
 	hyperfoil "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/api/hyperfoil/v1alpha2"
 	grafana "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/grafana/v1alpha1"
 	infinispan "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure/infinispan/v1"
