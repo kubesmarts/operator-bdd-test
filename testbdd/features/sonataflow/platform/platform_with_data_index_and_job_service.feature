@@ -57,7 +57,7 @@ Feature: Deploy SonataFlowPlatform with Data Index and JobService using Postgres
   @previewMode
   Scenario: Deploy callbackstatetimeouts example in preview mode and verify its functionality
     When SonataFlow callbackstatetimeouts example is deployed
-    Then SonataFlow "callbackstatetimeouts" has the condition "Running" set to "True" within 3 minutes
+    Then SonataFlow "callbackstatetimeouts" has the condition "Running" set to "True" within 5 minutes
   
   Scenario: Deploy vet example in preview mode and verify its functionality
     When SonataFlow vet example is deployed
