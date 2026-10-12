@@ -39,8 +39,8 @@ All flags prefixed `--tests.upgrade.*`:
 |------|---------|--------|
 | `upgrade.from_version` | `""` | `config.GetUpgradeFromVersion()` |
 | `upgrade.to_version` | `""` | `config.GetUpgradeToVersion()` |
-| `upgrade.to_kogito_runtime_version` | `"9.106.0.redhat-00002"` | `config.GetUpgradeToKogitoRuntimeVersion()` |
-| `upgrade.to_quarkus_core_version` | `"3.33.2.redhat-00008"` | `config.GetUpgradeToQuarkusCoreVersion()` |
+| `upgrade.to_kogito_runtime_version` | `""` (required for `@upgradeTests`) | `config.GetUpgradeToKogitoRuntimeVersion()` |
+| `upgrade.to_quarkus_core_version` | `""` (required for `@upgradeTests`) | `config.GetUpgradeToQuarkusCoreVersion()` |
 
 ## CLI flags — non-upgrade OLM install
 
@@ -102,8 +102,9 @@ Container name derived by `deploymentContainerName()`: strip `sonataflow-platfor
 | Tag | Meaning |
 |-----|---------|
 | `@upgradeTests` | Upgrade scenario — excluded from all normal runs; must be passed explicitly |
-| `@platform` | Platform-level tests (custom labels, ConfigMap props, etc.) |
-| `@Smoke` / `@smoke` | Smoke subset |
-| `@devMode` / `@previewMode` / `@gitOpsMode` | Profile-specific scenarios |
+| `@platform` | Custom pod-template labels on DI/JS (`platform_service_custom_labels.feature`); needs `operator.version` |
+| `@smoke` | Smoke subset (also selected by `smoke=true`) |
+| `@devMode` / `@previewMode` / `@gitOpsMode` | Profile-specific scenarios (ConfigMap props checks are `@previewMode`) |
+| `@workflows100` | 100 workflows on one DI/JS/Postgres platform |
 | `@disabled` | Always skipped |
-| `@performance` | Performance tests — excluded unless explicitly requested |
+| `@performance` | Excluded by the executor unless requested; no feature currently uses it |

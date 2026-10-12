@@ -44,14 +44,14 @@ testbdd/
     installation/
       install_logic_operator_yaml.feature                  YAML install path
     sonataflow/platform/
-      platform_with_data_index_and_job_service.feature     DI+JS platform smoke
-      platform_configmap_properties.feature                ConfigMap props checks  @platform
+      platform_with_data_index_and_job_service.feature     DI+JS platform  @devMode @previewMode @gitOpsMode
+      platform_configmap_properties.feature                ConfigMap props checks  @previewMode
       platform_service_custom_labels.feature               Label propagation test  @platform
-      plaform_default.feature                              default platform
+      platform_default.feature                             default platform  @devMode @gitOpsMode
     sonataflow/clusterplatform/
       deploy_greeting_example.feature
     sonataflow/performance/
-      deploy_100_workflows_with_di_js_postgresql.feature   @performance
+      deploy_100_workflows_with_di_js_postgresql.feature   @workflows100
     data-index/
       deploy_data_index_service.feature
     job-service/

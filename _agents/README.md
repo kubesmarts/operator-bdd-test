@@ -3,6 +3,12 @@
 Quick-start index for AI agents. Read this file first, then open the
 specific summary file for the area you are working on.
 
+Human-facing documentation (how to run the suite, tags, parameters,
+troubleshooting, contributing) lives in the READMEs:
+[`../README.md`](../README.md), [`../testbdd/README.md`](../testbdd/README.md),
+[`../bddframework/README.md`](../bddframework/README.md). Keep them in sync
+when behaviour described there changes.
+
 ## Repository purpose
 
 BDD (Behaviour-Driven Development) test suite for the **OpenShift Serverless

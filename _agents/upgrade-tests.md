@@ -49,12 +49,19 @@ make run-tests \
   cr_deployment_only=true \
   operator_installation_source=olm \
   "operator_catalog_image=registry-proxy.engineering.redhat.com/rh-osbs/iib:<IIB_INDEX>" \
-  "upgrade.from_version=1.38.1" \
+  "upgrade.from_version=1.38.2" \
   "upgrade.to_version=1.39.0" \
-  "upgrade.to_kogito_runtime_version=9.106.0.redhat-00002" \
-  "upgrade.to_quarkus_core_version=3.33.2.redhat-00008" \
+  "upgrade.to_kogito_runtime_version=9.106.0.redhat-00005" \
+  "upgrade.to_quarkus_core_version=3.33.3.redhat-00007" \
   tags="@upgradeTests"
 ```
+
+All four `upgrade.*` flags are required: the Kogito/Quarkus versions have empty
+defaults and are matched against the DI/JS startup log of the to-version build.
+
+Known issues: teardown leaves the operator installed (subscription and CSV in
+`openshift-operators`); InstallPlan approval can match stale InstallPlans from
+earlier runs.
 
 ## Key implementation files
 
@@ -101,8 +108,8 @@ directly — see the `...in cluster operator namespace` step pattern (Task 9).
 |-------------|-------------|---------|
 | `${UPGRADE_FROM_VERSION}` | `--tests.upgrade.from_version` | — |
 | `${UPGRADE_TO_VERSION}` | `--tests.upgrade.to_version` | — |
-| `${UPGRADE_TO_KOGITO_RUNTIME_VERSION}` | `--tests.upgrade.to_kogito_runtime_version` | `9.106.0.redhat-00002` |
-| `${UPGRADE_TO_QUARKUS_CORE_VERSION}` | `--tests.upgrade.to_quarkus_core_version` | `3.33.2.redhat-00008` |
+| `${UPGRADE_TO_KOGITO_RUNTIME_VERSION}` | `--tests.upgrade.to_kogito_runtime_version` | — |
+| `${UPGRADE_TO_QUARKUS_CORE_VERSION}` | `--tests.upgrade.to_quarkus_core_version` | — |
 
 Called automatically in:
 - `configMapContainsStrings` (operator.go)
@@ -154,8 +161,9 @@ returning — prevents `oc apply` racing against a terminating resource.
 | bdd-1183 | 1.38.1→1.39.0 | ~5m | ✅ |
 | bdd-66d8 | 1.38.1→1.39.0 | 8m46s | ✅ (with Tasks 1–8 DI/JS version checks) |
 | bdd-391a | 1.38.1→1.39.0 | 9m17s | ✅ (with Task 10 gitops steps) |
+| bdd-c086 | 1.38.2→1.39.0 (iib:1221962) | 10m45s | ✅ (to: 9.106.0.redhat-00005 / Quarkus 3.33.3.redhat-00007) |
 
-### DI/JS startup log pattern (bdd-66d8 / bdd-391a, confirmed)
+### DI/JS startup log pattern (bdd-66d8 / bdd-391a, 1.38.1→1.39.0 build at that time)
 ```
 data-index-service-postgresql 9.106.0.redhat-00002 on JVM (powered by Quarkus 3.33.2.redhat-00008) started in
 jobs-service-postgresql       9.106.0.redhat-00002 on JVM (powered by Quarkus 3.33.2.redhat-00008) started in
