@@ -29,8 +29,8 @@ import (
 
 	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api"
 	operatorapi "github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api/v1alpha08"
-	"github.com/davecgh/go-spew/spew"
 	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/log"
+	"github.com/davecgh/go-spew/spew"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/yaml"
@@ -46,7 +46,8 @@ const (
 	sonataFlowOrderProcessingFolder           = "order-processing"
 	sonataFlowGreetingFolder                  = "greeting"
 	sonataFlowVetFolder                       = "vet"
-	sonataFlowCallbackstateTimeoutsFolder     = "callbackstate-timeouts"
+	sonataFlowCallbackstateTimeoutsFolder          = "callbackstate-timeouts"
+	sonataFlowCallbackstateTimeoutsGitopsWorkflow   = "callbackstate-timeouts/gitops/callbackstatetimeouts_gitops.yaml"
 	postgresFolder                            = "persistence/postgres"
 	sonataFlowSampleYamlCR                    = "sonataflow.org_v1alpha08_sonataflow.yaml"
 	SonataFlowGreetingsWithDataInputSchemaCR  = "sonataflow.org_v1alpha08_sonataflow_greetings_datainput.yaml"
@@ -60,6 +61,7 @@ const (
 	sonataFlowPlatformWithCacheMinikubeYamlCR = "sonataflow.org_v1alpha08_sonataflowplatform_withCache_minikube.yaml"
 	sonataFlowPlatformForOpenshift            = "sonataflow.org_v1alpha08_sonataflowplatform_openshift.yaml"
 	sonataFlowPlatformDIAndJSUsingPostgres    = "sonataflow/platform/sonataflow.org_v1alpha08/sonataflow_platform_with_postgresql_dataindex_and_job_service.yaml"
+	sonataFlowPlatformDIAndJSWithDBMigration  = "sonataflow/platform/sonataflow.org_v1alpha08/sonataflow_platform_with_postgresql_dataindex_and_job_service_db_migration.yaml"
 	sonataFlowClusterPlatformYamlCR           = "sonataflow.org_v1alpha08_sonataflowclusterplatform.yaml"
 	sonataFlowBuilderConfig                   = "sonataflow-operator-builder-config_v1_configmap.yaml"
 	sonataFlowBuildSucceed                    = "sonataflow.org_v1alpha08_sonataflowbuild.yaml"
@@ -290,6 +292,10 @@ func GetSFPlatformWithDIandJSUsingPostgres() string {
 	return e2eSamples + sonataFlowPlatformDIAndJSUsingPostgres
 }
 
+func GetSFPlatformWithDIandJSWithDBMigration() string {
+	return e2eSamples + sonataFlowPlatformDIAndJSWithDBMigration
+}
+
 func GetSonataFlowE2eOrderProcessingFolder() string {
 	return e2eSamples + sonataFlowOrderProcessingFolder
 }
@@ -304,6 +310,10 @@ func GetSonataFlowE2eGreetingFolder() string {
 
 func GetSonataFlowE2eCallbackstateTimeoutsFolder() string {
 	return e2eSamples + sonataFlowCallbackstateTimeoutsFolder
+}
+
+func GetSonataFlowCallbackstateTimeoutsGitops() string {
+	return e2eSamples + sonataFlowCallbackstateTimeoutsGitopsWorkflow
 }
 
 func GetSonataFlowE2EPlatformServicesDirectory() string {

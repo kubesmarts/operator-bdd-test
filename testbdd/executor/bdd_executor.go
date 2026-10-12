@@ -49,6 +49,7 @@ const (
 	cliTag         = "@cli"
 	smokeTag       = "@smoke"
 	performanceTag = "@performance"
+	upgradeTag     = "@upgradeTests"
 )
 
 var (
@@ -128,6 +129,11 @@ func configureTags() {
 		}
 	}
 
+	// Exclude upgrade tests unless explicitly requested via --godog.tags
+	if !strings.Contains(godogOpts.Tags, upgradeTag) {
+		appendTag("~" + upgradeTag)
+	}
+
 	if !strings.Contains(godogOpts.Tags, disabledTag) {
 		// Ignore disabled tag
 		appendTag("~" + disabledTag)
@@ -170,8 +176,20 @@ func initializeTestSuite(ctx *godog.TestSuiteContext) {
 		monitorOlmNamespace()
 
 		if config.IsOperatorInstalledByOlm() {
-			if err := installGlobalSonataFlowOperator(); err != nil {
-				panic(err)
+			if scenarioManagesOperatorInstall() {
+				// Scenario steps own the full operator lifecycle (install + upgrade).
+				// The suite only needs to create and wait for the catalog source so
+				// those steps can subscribe to it.
+				if _, err := framework.CreateKogitoOperatorCatalogSource(); err != nil {
+					panic(fmt.Sprintf("error creating SonataFlow CatalogSource: %v", err))
+				}
+				if err := framework.WaitForKogitoOperatorCatalogSourceReady(); err != nil {
+					panic(fmt.Sprintf("error waiting for SonataFlow CatalogSource readiness: %v", err))
+				}
+			} else {
+				if err := installGlobalSonataFlowOperator(); err != nil {
+					panic(err)
+				}
 			}
 		}
 	})
@@ -327,6 +345,16 @@ func stopNamespaceMonitoring(namespace string) {
 	//if err := framework.BumpEvents(namespace); err != nil {
 	//	framework.GetMainLogger().Error(err, "Error bumping events", "namespace", namespace)
 	//}
+}
+
+// scenarioManagesOperatorInstall returns true when a scenario step is responsible
+// for installing the operator, meaning the suite-level BeforeSuite should not
+// perform a global operator install — only the catalog source setup is needed.
+//
+//   - upgrade.from_version: the upgrade scenario installs at from-version, then upgrades.
+//   - operator.version:     the platform scenario installs the specific version itself.
+func scenarioManagesOperatorInstall() bool {
+	return config.GetUpgradeFromVersion() != "" || config.GetOperatorVersion() != ""
 }
 
 // Install cluster wide SonataFlow operator from OLM

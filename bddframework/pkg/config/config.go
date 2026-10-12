@@ -46,7 +46,7 @@ type TestConfig struct {
 	operatorInstallationSource string
 	operatorCatalogImage       string
 	useProductOperator         bool
-	relatedImages map[string]string
+	relatedImages              map[string]string
 
 	// profiling
 	operatorProfiling                  bool
@@ -85,6 +85,15 @@ type TestConfig struct {
 	examplesRepositoryRef       string
 	examplesRepositoryIgnoreSSL bool
 
+	// operator version (for non-upgrade scenarios that still need a specific version installed via OLM)
+	operatorVersion string
+
+	// upgrade testing
+	upgradeFromVersion            string
+	upgradeToVersion              string
+	upgradeToKogitoRuntimeVersion string
+	upgradeToQuarkusCoreVersion   string
+
 	// Infinispan
 	infinispanInstallationSource string
 	infinispanStorageClass       string
@@ -107,6 +116,10 @@ const (
 	defaultOperatorYamlURI      = "http://raw.githubusercontent.com/kubesmarts/kie-tools/refs/heads/9.105.x-prod/packages/sonataflow-operator/operator.yaml"
 	defaultRhpamOperatorYamlURI = "../rhpam-operator.yaml"
 	defaultCliPath              = "../build/_output/bin/kogito"
+
+	// defaultUpgradeCatalogImage is the IIB index image used by upgrade tests when
+	// --tests.operator_catalog_image is not explicitly provided.
+	defaultUpgradeCatalogImage = "registry-proxy.engineering.redhat.com/rh-osbs/iib:1196314"
 
 	defaultOperatorProfilingDataAccessYamlURI = "../profiling/kogito-operator-profiling-data-access.yaml"
 	defaultOperatorProfilingOutputFileURI     = "./bdd-cover.out"
@@ -152,16 +165,16 @@ func BindFlags(set *flag.FlagSet) {
 	set.StringVar(&env.operatorInstallationSource, prefix+"operator_installation_source", installationSourceYaml, "Operator installation source")
 	set.StringVar(&env.operatorCatalogImage, prefix+"operator_catalog_image", "", "Operator catalog image")
 	set.BoolVar(&env.useProductOperator, prefix+"use_product_operator", false, "Set to true to deploy RHPAM Kogito operator, false for using Kogito operator. Default is false.")
-	// operator related images	
+	// operator related images
 	for _, v := range GetRelatedImageVars() {
-        flagName := strings.ToLower(strings.TrimPrefix(v, "RELATED_IMAGE_"))
+		flagName := strings.ToLower(strings.TrimPrefix(v, "RELATED_IMAGE_"))
 		// set.String automatically returns a *string linked to the CLI flag!
 		relatedImagePointers[v] = set.String(
-				"operator.related_image."+flagName, 
-				"", 
-				fmt.Sprintf("Override for %s", v),
-				)
-    }
+			"operator.related_image."+flagName,
+			"",
+			fmt.Sprintf("Override for %s", v),
+		)
+	}
 
 	// operator profiling
 	set.BoolVar(&env.operatorProfiling, prefix+"operator_profiling_enabled", false, "Enable the profiling of the operator. If enabled, operator will be automatically deployed with yaml files.")
@@ -199,6 +212,15 @@ func BindFlags(set *flag.FlagSet) {
 	set.StringVar(&env.examplesRepositoryURI, prefix+"examples_uri", defaultKogitoExamplesURI, "Set the URI for the kogito-examples repository")
 	set.StringVar(&env.examplesRepositoryRef, prefix+"examples_ref", "", "Set the branch for the kogito-examples repository")
 	set.BoolVar(&env.examplesRepositoryIgnoreSSL, prefix+"examples_ignore_ssl", false, "Set to true to ignore SSL check when checking out examples repository")
+
+	// operator version for non-upgrade OLM installs
+	set.StringVar(&env.operatorVersion, prefix+"operator.version", "", "Operator version to install via OLM (e.g. 1.39.0)")
+
+	// upgrade testing
+	set.StringVar(&env.upgradeFromVersion, prefix+"upgrade.from_version", "", "Operator version to upgrade from (e.g. 1.37.2)")
+	set.StringVar(&env.upgradeToVersion, prefix+"upgrade.to_version", "", "Operator version to upgrade to (e.g. 1.38.0)")
+	set.StringVar(&env.upgradeToKogitoRuntimeVersion, prefix+"upgrade.to_kogito_runtime_version", "", "Kogito runtime version for the to-version operator (e.g. 9.106.0.redhat-00002)")
+	set.StringVar(&env.upgradeToQuarkusCoreVersion, prefix+"upgrade.to_quarkus_core_version", "", "Quarkus core version for the to-version operator (e.g. 3.33.2.redhat-00008)")
 
 	// Infinispan
 	set.StringVar(&env.infinispanInstallationSource, prefix+"infinispan_installation_source", installationSourceOlm, "Infinispan operator installation source")
@@ -240,14 +262,14 @@ func addPersistenceTypeImageTagFlags(set *flag.FlagSet, imageTags *imageTags, im
 // Get Array of string identifiers for all operator RELATED_IMAGES keys
 func GetRelatedImageVars() []string {
 	return []string{
-        "RELATED_IMAGE_JOBS_SERVICE_POSTGRESQL",
-        "RELATED_IMAGE_JOBS_SERVICE_EPHEMERAL",
-        "RELATED_IMAGE_DATA_INDEX_POSTGRESQL",
-        "RELATED_IMAGE_DATA_INDEX_EPHEMERAL",
-        "RELATED_IMAGE_DB_MIGRATOR_TOOL",
-        "RELATED_IMAGE_BASE_BUILDER",
-        "RELATED_IMAGE_DEVMODE",
-    }
+		"RELATED_IMAGE_JOBS_SERVICE_POSTGRESQL",
+		"RELATED_IMAGE_JOBS_SERVICE_EPHEMERAL",
+		"RELATED_IMAGE_DATA_INDEX_POSTGRESQL",
+		"RELATED_IMAGE_DATA_INDEX_EPHEMERAL",
+		"RELATED_IMAGE_DB_MIGRATOR_TOOL",
+		"RELATED_IMAGE_BASE_BUILDER",
+		"RELATED_IMAGE_DEVMODE",
+	}
 }
 
 // GetRelatedImage returns the override for a specific related image variable
@@ -332,9 +354,17 @@ func IsOperatorInstalledByYaml() bool {
 	return env.operatorInstallationSource == installationSourceYaml
 }
 
-// GetOperatorCatalogImage return the image tag for the Kogito operator catalog
+// GetOperatorCatalogImage return the image tag for the Kogito operator catalog.
+// Falls back to defaultUpgradeCatalogImage when running upgrade tests (upgrade.to_version
+// is set) and no explicit catalog image has been provided.
 func GetOperatorCatalogImage() string {
-	return env.operatorCatalogImage
+	if env.operatorCatalogImage != "" {
+		return env.operatorCatalogImage
+	}
+	if env.upgradeToVersion != "" {
+		return defaultUpgradeCatalogImage
+	}
+	return ""
 }
 
 // UseProductOperator return true if RHPAM Kogito operator should be used, false for Kogito operator
@@ -490,6 +520,33 @@ func GetExamplesRepositoryRef() string {
 // IsExamplesRepositoryIgnoreSSL return whether SSL should be ignored on Git checkout
 func IsExamplesRepositoryIgnoreSSL() bool {
 	return env.examplesRepositoryIgnoreSSL
+}
+
+// upgrade testing
+
+// GetUpgradeFromVersion returns the operator version being upgraded from
+func GetUpgradeFromVersion() string {
+	return env.upgradeFromVersion
+}
+
+// GetUpgradeToVersion returns the operator version being upgraded to
+func GetUpgradeToVersion() string {
+	return env.upgradeToVersion
+}
+
+// GetUpgradeToKogitoRuntimeVersion returns the Kogito runtime version for the to-version operator
+func GetUpgradeToKogitoRuntimeVersion() string {
+	return env.upgradeToKogitoRuntimeVersion
+}
+
+// GetUpgradeToQuarkusCoreVersion returns the Quarkus core version for the to-version operator
+func GetUpgradeToQuarkusCoreVersion() string {
+	return env.upgradeToQuarkusCoreVersion
+}
+
+// GetOperatorVersion returns the operator version to install via OLM for non-upgrade scenarios
+func GetOperatorVersion() string {
+	return env.operatorVersion
 }
 
 // Infinispan
