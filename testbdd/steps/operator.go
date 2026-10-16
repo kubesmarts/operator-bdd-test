@@ -43,7 +43,6 @@ func registerOperatorSteps(ctx *godog.ScenarioContext, data *Data) {
 	ctx.Step(`^ConfigMap "([^"]*)" exists$`, data.configMapExists)
 	ctx.Step(`^ConfigMap "([^"]*)" is empty$`, data.configMapIsEmpty)
 	ctx.Step(`^ConfigMap "([^"]*)" contains following strings:$`, data.configMapContainsStrings)
-	ctx.Step(`^SonataFlow Operator is installed via OLM$`, data.sonataFlowOperatorIsInstalledViaOLM)
 	ctx.Step(`^SonataFlow Operator at from-version is installed via OLM$`, data.sonataFlowOperatorAtFromVersionIsInstalledViaOLM)
 	ctx.Step(`^SonataFlow Operator is upgraded to next version$`, data.sonataFlowOperatorIsUpgradedToNextVersion)
 	ctx.Step(`^SonataFlow Operator running version matches upgrade target$`, data.sonataFlowOperatorRunningVersionMatchesUpgradeTarget)
@@ -182,14 +181,10 @@ func (data *Data) configMapContainsStrings(cmName string, table *godog.Table) er
 			builderImage := config.GetRelatedImage("RELATED_IMAGE_BASE_BUILDER")
 			framework.GetLogger(data.Namespace).Info("Builder Image is:", "Image:", builderImage)
 			if builderImage == "" {
-				// No explicit override — derive from the installed operator version.
-				// Use install_version (suite-level OLM pin) first, then operator.version.
+				// No explicit override — derive from the suite-level install version.
 				version := config.GetOperatorInstallVersion()
 				if version == "" {
-					version = config.GetOperatorVersion()
-				}
-				if version == "" {
-					return fmt.Errorf("cannot resolve ${RELATED_IMAGE_BASE_BUILDER}: set operator.related_image.base_builder, operator.install_version, or operator.version")
+					return fmt.Errorf("cannot resolve ${RELATED_IMAGE_BASE_BUILDER}: set operator.related_image.base_builder or operator.install_version")
 				}
 				builderImage = "registry.redhat.io/openshift-serverless-1/logic-swf-builder-rhel9:" + version
 			}
@@ -215,21 +210,6 @@ func (data *Data) sonataFlowOperatorAtFromVersionIsInstalledViaOLM() error {
 		return fmt.Errorf("upgrade from-version is not configured: set --tests.upgrade.from_version")
 	}
 	return data.installOperatorViaOLMWithCatalog(fromVersion, framework.GetProductCatalog)
-}
-
-// sonataFlowOperatorIsInstalledViaOLM installs the OSL operator at the version configured
-// via --tests.operator.version. Uses the custom IIB catalog when operator_catalog_image is
-// set (e.g. pre-release versions), otherwise falls back to the product catalog.
-func (data *Data) sonataFlowOperatorIsInstalledViaOLM() error {
-	version := config.GetOperatorVersion()
-	if version == "" {
-		return fmt.Errorf("operator version is not configured: set --tests.operator.version")
-	}
-	catalogFn := framework.GetProductCatalog
-	if config.GetOperatorCatalogImage() != "" {
-		catalogFn = framework.GetCustomKogitoOperatorCatalog
-	}
-	return data.installOperatorViaOLMWithCatalog(version, catalogFn)
 }
 
 // installOperatorViaOLMWithCatalog is the shared implementation for OLM-based operator

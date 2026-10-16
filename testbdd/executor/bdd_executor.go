@@ -176,7 +176,7 @@ func initializeTestSuite(ctx *godog.TestSuiteContext) {
 		monitorOlmNamespace()
 
 		if (config.GetOperatorInstallVersion() != "" || config.GetOperatorInstallChannel() != "") && scenarioManagesOperatorInstall() {
-			panic("operator.install_version and operator.install_channel apply to the suite-level install, but operator.version or upgrade.from_version makes the scenario install the operator itself: unset one of them")
+			panic("operator.install_version and operator.install_channel apply to the suite-level install, but upgrade.from_version makes the upgrade scenario install the operator itself: unset one of them")
 		}
 
 		if config.IsOperatorInstalledByOlm() {
@@ -352,13 +352,11 @@ func stopNamespaceMonitoring(namespace string) {
 }
 
 // scenarioManagesOperatorInstall returns true when a scenario step is responsible
-// for installing the operator, meaning the suite-level BeforeSuite should not
-// perform a global operator install — only the catalog source setup is needed.
-//
-//   - upgrade.from_version: the upgrade scenario installs at from-version, then upgrades.
-//   - operator.version:     the platform scenario installs the specific version itself.
+// for installing the operator. When true, BeforeSuite skips the global install and
+// only creates the CatalogSource so the scenario steps can subscribe to it.
+// Only @upgradeTests scenarios manage their own operator lifecycle.
 func scenarioManagesOperatorInstall() bool {
-	return config.GetUpgradeFromVersion() != "" || config.GetOperatorVersion() != ""
+	return config.GetUpgradeFromVersion() != ""
 }
 
 // Install cluster wide SonataFlow operator from OLM
