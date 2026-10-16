@@ -7,6 +7,7 @@ Feature: Deploy SonataFlowPlatform with Data Index and JobService using Postgres
     Given Namespace is created
     When Postgres is deployed
     When SonataFlowPlatform with DataIndexAndJobsService using Postgres is deployed
+    Then Data Index and Job Service run the expected Kogito and Quarkus versions within 5 minutes
 
   @devMode
   Scenario: Deploy order-processing example in dev mode and verify its functionality

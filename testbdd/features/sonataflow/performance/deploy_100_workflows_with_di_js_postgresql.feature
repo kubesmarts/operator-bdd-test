@@ -9,6 +9,7 @@ Feature: Deploy 100 workflows with one DataIndex using Postgres
   Given Namespace is created
   When Postgres is deployed
   When SonataFlowPlatform with DataIndexAndJobsService using Postgres is deployed
+  Then Data Index and Job Service run the expected Kogito and Quarkus versions within 5 minutes
   When 100 greeting workflows are deployed  
   Then Wait for 100 pods to be running in the namespace
   

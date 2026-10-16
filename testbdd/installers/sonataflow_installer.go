@@ -99,17 +99,36 @@ var (
 
 // GetSonataFlowInstaller returns SonataFlow installer
 func GetSonataFlowInstaller() (installers.ServiceInstaller, error) {
+	installVersion := config.GetOperatorInstallVersion()
+	installChannel := config.GetOperatorInstallChannel()
+
 	// If user doesn't pass SonataFlow operator image then use community OLM catalog to install operator
 	if len(config.GetOperatorImageTag()) == 0 {
+		if installVersion != "" || installChannel != "" {
+			return nil, errors.New("operator.install_version and operator.install_channel require the custom OLM installer: set operator_installation_source=olm, operator_catalog_image and a non-empty operator_image_tag")
+		}
 		framework.GetMainLogger().Info("Installing SonataFlow operator using community catalog.")
 		return &sonataFlowOlmClusterWideInstaller, nil
 	}
 
 	if config.IsOperatorInstalledByYaml() || config.IsOperatorProfiling() {
+		if installVersion != "" || installChannel != "" {
+			return nil, errors.New("operator.install_version and operator.install_channel are only supported with operator_installation_source=olm")
+		}
 		return &sonataFlowYamlClusterInstaller, nil
 	}
 
 	if config.IsOperatorInstalledByOlm() {
+		if installChannel != "" {
+			sonataFlowCustomOlmClusterWideInstaller.Channel = installChannel
+			framework.GetMainLogger().Info("Installing SonataFlow operator from channel", "channel", installChannel)
+		}
+		if installVersion != "" {
+			sonataFlowCustomOlmClusterWideInstaller.StartingCSV = fmt.Sprintf("%s.v%s", logicOperatorSubscriptionName, installVersion)
+			sonataFlowCustomOlmClusterWideInstaller.PinStartingCSV = true
+			framework.GetMainLogger().Info("Installing SonataFlow operator pinned to version", "version", installVersion,
+				"startingCSV", sonataFlowCustomOlmClusterWideInstaller.StartingCSV)
+		}
 		return &sonataFlowCustomOlmClusterWideInstaller, nil
 	}
 

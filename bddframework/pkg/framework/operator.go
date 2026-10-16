@@ -21,6 +21,7 @@ package framework
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework/infrastructure"
 	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/meta"
@@ -327,8 +328,122 @@ func isOperatorGroupReady(namespace, operatorGroupName string) (bool, error) {
 	return false, nil
 }
 
+// InstallClusterWideOperatorAtCSV installs a cluster wide operator pinned to startingCSV.
+//
+// The Subscription uses manual InstallPlan approval, so OLM cannot move past startingCSV along
+// the channel. Only the InstallPlan that installs startingCSV is approved; InstallPlans for
+// later versions stay pending.
+func InstallClusterWideOperatorAtCSV(subscriptionName, channel, startingCSV string, catalog OperatorCatalog, timeoutInMin int) error {
+	namespace := GetClusterOperatorNamespace()
+	GetLogger(namespace).Info("Subscribing to operator at pinned version", "subscriptionName", subscriptionName,
+		"startingCSV", startingCSV, "catalogSource", catalog.source, "channel", channel, "namespace", namespace)
+
+	if _, err := createNamespacedSubscriptionIfNotExist(namespace, subscriptionName, subscriptionName, catalog, channel, startingCSV, olmapiv1alpha1.ApprovalManual); err != nil {
+		return err
+	}
+
+	// CreateIfNotExists keeps a pre-existing Subscription untouched, so make sure it is the pinned one.
+	subscription, err := getSubscription(kubeClient, namespace, subscriptionName, catalog.source)
+	if err != nil {
+		return err
+	}
+	if subscription == nil || subscription.Spec == nil {
+		return fmt.Errorf("subscription %s using catalog %s not found in namespace %s", subscriptionName, catalog.source, namespace)
+	}
+	if subscription.Spec.StartingCSV != startingCSV || subscription.Spec.InstallPlanApproval != olmapiv1alpha1.ApprovalManual || subscription.Spec.Channel != channel {
+		return fmt.Errorf("existing Subscription %s/%s (startingCSV %q, approval %q, channel %q) does not match the requested pinned install (startingCSV %q, approval %q, channel %q): delete the Subscription and its %s CSVs, then run again",
+			namespace, subscriptionName, subscription.Spec.StartingCSV, subscription.Spec.InstallPlanApproval, subscription.Spec.Channel,
+			startingCSV, olmapiv1alpha1.ApprovalManual, channel, subscriptionName)
+	}
+
+	if err := WaitForOnOpenshift(namespace, fmt.Sprintf("InstallPlan for %s approved", startingCSV), timeoutInMin,
+		func() (bool, error) {
+			return approveInstallPlanOfSubscription(namespace, subscriptionName, catalog, startingCSV)
+		},
+		func() (bool, error) {
+			return SubscriptionResolutionFails(namespace, subscriptionName, catalog.source)
+		},
+	); err != nil {
+		return fmt.Errorf("%w; %s", err, subscriptionDiagnostics(namespace, subscriptionName, catalog))
+	}
+
+	// currentCSV of the Subscription may already point to a newer version whose InstallPlan is
+	// waiting for approval, so check the Deployment owned by the pinned CSV instead.
+	return WaitForOnOpenshift(namespace, fmt.Sprintf("%s operator running", startingCSV), timeoutInMin,
+		func() (bool, error) {
+			return isCSVOperatorRunning(namespace, startingCSV)
+		})
+}
+
+// approveInstallPlanOfSubscription approves the InstallPlan referenced by the Subscription, but only
+// when it installs the given CSV. Returns (false, nil) while the InstallPlan does not exist yet.
+func approveInstallPlanOfSubscription(namespace, subscriptionName string, catalog OperatorCatalog, csvName string) (bool, error) {
+	subscription, err := getSubscription(kubeClient, namespace, subscriptionName, catalog.source)
+	if err != nil {
+		return false, err
+	}
+	if subscription == nil || subscription.Status.InstallPlanRef == nil {
+		return false, nil
+	}
+
+	installPlan := &olmapiv1alpha1.InstallPlan{}
+	exists, err := kubernetes.ResourceC(kubeClient).FetchWithKey(
+		types.NamespacedName{Namespace: namespace, Name: subscription.Status.InstallPlanRef.Name}, installPlan)
+	if err != nil {
+		return false, err
+	}
+	if !exists || !slices.Contains(installPlan.Spec.ClusterServiceVersionNames, csvName) {
+		return false, nil
+	}
+	if installPlan.Spec.Approved {
+		return true, nil
+	}
+
+	GetLogger(namespace).Info("Approving InstallPlan", "installPlan", installPlan.Name, "csv", csvName)
+	installPlan.Spec.Approved = true
+	if err := kubernetes.ResourceC(kubeClient).Update(installPlan); err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+// isCSVOperatorRunning returns true when the Deployment owned by the given CSV has an available replica
+func isCSVOperatorRunning(namespace, csvName string) (bool, error) {
+	deployments := &v1.DeploymentList{}
+	if err := kubernetes.ResourceC(kubeClient).ListWithNamespaceAndLabel(namespace, deployments,
+		map[string]string{"olm.owner.kind": "ClusterServiceVersion", "olm.owner": csvName}); err != nil {
+		return false, fmt.Errorf("error while trying to fetch Deployment with label olm.owner '%s': %w", csvName, err)
+	}
+	for _, deployment := range deployments.Items {
+		if deployment.Status.AvailableReplicas > 0 {
+			return true, nil
+		}
+	}
+	return false, nil
+}
+
+// subscriptionDiagnostics summarizes the Subscription conditions to explain why an install is stuck
+func subscriptionDiagnostics(namespace, subscriptionName string, catalog OperatorCatalog) string {
+	subscription, err := getSubscription(kubeClient, namespace, subscriptionName, catalog.source)
+	if err != nil || subscription == nil {
+		return "subscription conditions unavailable"
+	}
+	conditions := ""
+	for _, condition := range subscription.Status.Conditions {
+		conditions += fmt.Sprintf(" [%s=%s reason=%q message=%q]", condition.Type, condition.Status, condition.Reason, condition.Message)
+	}
+	return fmt.Sprintf("subscription conditions:%s; if the bundle is still unpacking, check the unpack Job pods in %s for image pull errors",
+		conditions, catalog.namespace)
+}
+
 // CreateNamespacedSubscriptionIfNotExist create a namespaced subscription if not exists
 func CreateNamespacedSubscriptionIfNotExist(namespace string, subscriptionName string, operatorName string, catalog OperatorCatalog, channel, startingCSV string) (*olmapiv1alpha1.Subscription, error) {
+	return createNamespacedSubscriptionIfNotExist(namespace, subscriptionName, operatorName, catalog, channel, startingCSV, "")
+}
+
+// createNamespacedSubscriptionIfNotExist creates a namespaced subscription if not exists.
+// An empty installPlanApproval keeps the OLM default (Automatic).
+func createNamespacedSubscriptionIfNotExist(namespace string, subscriptionName string, operatorName string, catalog OperatorCatalog, channel, startingCSV string, installPlanApproval olmapiv1alpha1.Approval) (*olmapiv1alpha1.Subscription, error) {
 	subscription := &olmapiv1alpha1.Subscription{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      subscriptionName,
@@ -341,6 +456,7 @@ func CreateNamespacedSubscriptionIfNotExist(namespace string, subscriptionName s
 			CatalogSourceNamespace: catalog.namespace,
 			Channel:                channel,
 			StartingCSV:            startingCSV,
+			InstallPlanApproval:    installPlanApproval,
 		},
 	}
 

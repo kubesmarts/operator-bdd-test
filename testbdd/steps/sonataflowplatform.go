@@ -26,6 +26,7 @@ import (
 
 	"github.com/cucumber/godog"
 
+	"github.com/kubesmarts/operator-bdd-test/bddframework/pkg/config"
 	framework "github.com/kubesmarts/operator-bdd-test/bddframework/pkg/framework"
 	"github.com/kubesmarts/operator-bdd-test/test"
 	"github.com/kubesmarts/operator-bdd-test/test/utils"
@@ -44,6 +45,31 @@ func registerPlatformSteps(ctx *godog.ScenarioContext, data *Data) {
 	ctx.Step(`^SonataFlowPlatform with postgres config is deployed$`, data.sonataFlowPlatformWithDataIndexIsDeployed)
 	ctx.Step(`^SonataFlowPlatform with DataIndexAndJobsService using Postgres is deployed$`, data.sonataFlowPlatformWithDataIndexAndJobsServiceUsingPostgresIsDeployed)
 	ctx.Step(`^SonataFlowPlatform with DataIndexAndJobsService using Postgres and DB migration strategy is deployed$`, data.sonataFlowPlatformWithDataIndexAndJobsServiceWithDBMigrationIsDeployed)
+	ctx.Step(`^Data Index and Job Service run the expected Kogito and Quarkus versions within (\d+) minutes$`, data.dataIndexAndJobServiceRunExpectedVersions)
+}
+
+// dataIndexAndJobServiceRunExpectedVersions verifies that the Postgres-backed Data Index
+// and Job Service started with the Kogito/Quarkus versions given by
+// --tests.operator.kogito_runtime_version and --tests.operator.quarkus_core_version.
+// Both flags are required; the step fails when either is missing.
+func (data *Data) dataIndexAndJobServiceRunExpectedVersions(timeoutInMin int) error {
+	kogitoVersion := config.GetOperatorKogitoRuntimeVersion()
+	quarkusVersion := config.GetOperatorQuarkusCoreVersion()
+	if kogitoVersion == "" || quarkusVersion == "" {
+		return fmt.Errorf("operator.kogito_runtime_version and operator.quarkus_core_version must be set to verify Data Index/Job Service versions")
+	}
+
+	services := []struct{ deployment, logPrefix string }{
+		{"sonataflow-platform-data-index-service", "data-index-service-postgresql"},
+		{"sonataflow-platform-jobs-service", "jobs-service-postgresql"},
+	}
+	for _, svc := range services {
+		logText := fmt.Sprintf("%s %s on JVM (powered by Quarkus %s) started in", svc.logPrefix, kogitoVersion, quarkusVersion)
+		if err := framework.WaitForAnyPodsByDeploymentToContainTextInLog(data.Namespace, svc.deployment, deploymentContainerName(svc.deployment), logText, timeoutInMin); err != nil {
+			return fmt.Errorf("%s does not run Kogito %s / Quarkus %s: %w", svc.deployment, kogitoVersion, quarkusVersion, err)
+		}
+	}
+	return nil
 }
 
 func (data *Data) sonataFlowPlatformIsDeployed() error {

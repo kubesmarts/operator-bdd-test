@@ -33,3 +33,4 @@ database/
 database/index.db
 e2e-test-report*.xml
 *.tar
+bdd-*.log

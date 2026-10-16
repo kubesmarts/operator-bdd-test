@@ -175,6 +175,10 @@ func initializeTestSuite(ctx *godog.TestSuiteContext) {
 
 		monitorOlmNamespace()
 
+		if (config.GetOperatorInstallVersion() != "" || config.GetOperatorInstallChannel() != "") && scenarioManagesOperatorInstall() {
+			panic("operator.install_version and operator.install_channel apply to the suite-level install, but operator.version or upgrade.from_version makes the scenario install the operator itself: unset one of them")
+		}
+
 		if config.IsOperatorInstalledByOlm() {
 			if scenarioManagesOperatorInstall() {
 				// Scenario steps own the full operator lifecycle (install + upgrade).

@@ -16,6 +16,7 @@ Feature: SonataFlowPlatform services propagate custom pod-template labels to Dep
     Given Namespace is created
     When Postgres is deployed
     When SonataFlowPlatform with DataIndexAndJobsService using Postgres is deployed
+    Then Data Index and Job Service run the expected Kogito and Quarkus versions within 5 minutes
 
   @platform
   Scenario: Custom labels defined in podTemplate.metadata are propagated to Data Index and Job Service Deployments

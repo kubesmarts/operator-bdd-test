@@ -16,6 +16,7 @@ Feature: Deploy Logic Operator with using YAML
       | FROM registry.access.redhat.com/ubi9/openjdk-17-runtime:1.24 |
     When Postgres is deployed
     When SonataFlowPlatform with DataIndexAndJobsService using Postgres is deployed
+    Then Data Index and Job Service run the expected Kogito and Quarkus versions within 5 minutes
     When SonataFlow callbackstatetimeouts example is deployed
     Then SonataFlow "callbackstatetimeouts" has the condition "Running" set to "True" within 5 minutes
     Then HTTP POST request on non-dev SonataFlow "callbackstatetimeouts" is successful within 1 minute with path "callbackstatetimeouts", expectedResponseContains '"workflowdata":{"message":"Hello"}"' and body:

@@ -323,9 +323,12 @@ var _ ClusterWideServiceInstaller = &OlmClusterWideServiceInstaller{}
 
 // OlmClusterWideServiceInstaller installs service using OLM, installed cluster wide
 type OlmClusterWideServiceInstaller struct {
-	SubscriptionName             string
-	Channel                      string
-	StartingCSV                  string
+	SubscriptionName string
+	Channel          string
+	StartingCSV      string
+	// PinStartingCSV installs exactly StartingCSV: the Subscription uses manual InstallPlan approval and
+	// only the InstallPlan of StartingCSV is approved, so OLM does not upgrade to the head of the channel.
+	PinStartingCSV               bool
 	Catalog                      func() framework.OperatorCatalog
 	InstallationTimeoutInMinutes int
 	// Return all CRs of this service which exists in this namespace
@@ -340,6 +343,12 @@ func (installer *OlmClusterWideServiceInstaller) Install(namespace string) error
 	if _, loaded := installedClusterWideServices.LoadOrStore(installer, true); loaded {
 		// Should be running already, wait until it is up
 		return framework.WaitForClusterWideOperatorRunning(installer.SubscriptionName, installer.Catalog(), installer.InstallationTimeoutInMinutes)
+	}
+
+	if installer.PinStartingCSV {
+		// Waits for the pinned CSV itself: with manual approval the Subscription's currentCSV may already
+		// point to a newer version that is not installed.
+		return framework.InstallClusterWideOperatorAtCSV(installer.SubscriptionName, installer.Channel, installer.StartingCSV, installer.Catalog(), installer.InstallationTimeoutInMinutes)
 	}
 
 	if err := framework.InstallClusterWideOperator(installer.SubscriptionName, installer.Channel, installer.StartingCSV, installer.Catalog()); err != nil {
