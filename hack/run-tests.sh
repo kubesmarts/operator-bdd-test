@@ -46,8 +46,11 @@ STRING_TEST_PARAMS+=(custom_maven_repo_url maven_mirror_url quarkus_platform_mav
 BOOLEAN_TEST_PARAMS+=(examples_ignore_ssl)
 STRING_TEST_PARAMS+=(examples_uri examples_ref)
 
-# operator version (for non-upgrade OLM installs)
-STRING_TEST_PARAMS+=("operator.version")
+# operator suite-level OLM install flags
+STRING_TEST_PARAMS+=("operator.install_version" "operator.install_channel" "operator.kogito_runtime_version" "operator.quarkus_core_version")
+
+# operator related images
+STRING_TEST_PARAMS+=("operator\.related_image\..+")
 
 # upgrade testing
 STRING_TEST_PARAMS+=("upgrade.from_version" "upgrade.to_version" "upgrade.to_kogito_runtime_version" "upgrade.to_quarkus_core_version")

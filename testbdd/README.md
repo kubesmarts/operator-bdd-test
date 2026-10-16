@@ -16,7 +16,7 @@ This module contains the BDD scenarios for the OpenShift Serverless Logic operat
 make run-tests key=value ...         testbdd/Makefile turns every key=value into --key "value"
   └─ hack/run-tests.sh               maps options to Go test flags (--tests.*, --godog.*)
       └─ go test ./testbdd           main_test.go -> executor.ExecuteBDDTests()
-          ├─ BeforeSuite             installs the operator (OLM) unless a scenario installs it itself
+          ├─ BeforeSuite             installs the operator (OLM) — always suite-level, except @upgradeTests
           ├─ per scenario            creates a random namespace bdd-xxxx, runs the steps, deletes the namespace
           └─ AfterSuite              uninstalls what the suite installed, deletes the test CatalogSource
 ```
@@ -25,7 +25,8 @@ Key behaviour of the executor ([`executor/bdd_executor.go`](executor/bdd_executo
 
 - `@disabled`, `@performance` and `@upgradeTests` scenarios are **excluded automatically** unless you request them explicitly.
 - With `operator_installation_source=olm`, `BeforeSuite` creates the CatalogSource `bdd-tests-kogito-catalog` (from `operator_catalog_image`) in `openshift-marketplace`. It then subscribes to `logic-operator` in `openshift-operators`.
-- If `operator.version` or `upgrade.from_version` is set, `BeforeSuite` **only** creates the CatalogSource. The scenario then installs the operator with a dedicated step.
+- Only `@upgradeTests` scenarios install the operator themselves. All other scenarios assume the operator is already running after `BeforeSuite`.
+- If `upgrade.from_version` is set, `BeforeSuite` **only** creates the CatalogSource. The upgrade scenario steps then own the full install-and-upgrade lifecycle.
 - Each scenario runs in a fresh namespace, which is deleted afterwards unless `keep_namespace=true` is set.
 
 ## Running the suite
@@ -45,9 +46,9 @@ Run commands from the repository root with `make -C testbdd run-tests ...`, or f
 make -C testbdd run-tests dry_run=true cr_deployment_only=true tags="@previewMode"
 ```
 
-### Profile and platform tags with an index (IIB) image
+### Running the full suite (pipeline stage 2)
 
-Use this for `@devMode`, `@previewMode` and `@gitOpsMode`:
+No `tags=` needed. The executor auto-excludes `@upgradeTests`, `@performance`, and `@disabled`. All of `@smoke`, `@devMode`, `@previewMode`, `@gitOpsMode`, and `@platform` scenarios run.
 
 ```bash
 export IIB_IMAGE="registry-proxy.engineering.redhat.com/rh-osbs/iib:<INDEX>"
@@ -57,29 +58,59 @@ make -C testbdd run-tests \
   operator_installation_source=olm \
   operator_catalog_image="$IIB_IMAGE" \
   operator_image_tag="olm-install-ignored" \
-  tags="@devMode" \
+  operator.install_channel=<CHANNEL> \
+  operator.install_version=<VERSION> \
+  operator.kogito_runtime_version=<KOGITO_VERSION> \
+  operator.quarkus_core_version=<QUARKUS_VERSION> \
   format=pretty \
-  2>&1 | tee bdd-devMode.log
+  2>&1 | tee bdd-full.log
 ```
 
-> **Why `operator_image_tag`?** When `operator_image_tag` is empty, the installer falls back to the **community** catalog ([`installers/sonataflow_installer.go`](installers/sonataflow_installer.go)). In OLM mode the value itself is not used, so any non-empty placeholder works.
+### Pipeline stages
 
-> **Do not set `operator.version` for these tags.** It disables the global install, and these scenarios have no install step of their own.
+Run the smoke gate first. If it passes, run the full suite.
 
-### `@platform`: the scenario installs a specific version itself
+**Stage 1 — gate (fast, fails early):**
 
 ```bash
 make -C testbdd run-tests \
   cr_deployment_only=true \
   operator_installation_source=olm \
   operator_catalog_image="$IIB_IMAGE" \
-  "operator.version=1.39.0" \
-  tags="@platform" \
-  format=pretty \
-  2>&1 | tee bdd-platform.log
+  operator_image_tag="olm-install-ignored" \
+  operator.install_channel=<CHANNEL> \
+  operator.install_version=<VERSION> \
+  operator.kogito_runtime_version=<KOGITO_VERSION> \
+  operator.quarkus_core_version=<QUARKUS_VERSION> \
+  tags="@smoke" format=pretty \
+  2>&1 | tee bdd-smoke.log
 ```
 
-The step `SonataFlow Operator is installed via OLM` installs `logic-operator.v<operator.version>`. It uses the custom catalog when `operator_catalog_image` is set, otherwise `redhat-operators`.
+**Stage 2 — full suite (only if stage 1 passed):** use the "Running the full suite" command above.
+
+### Running a single tag
+
+```bash
+make -C testbdd run-tests \
+  cr_deployment_only=true \
+  operator_installation_source=olm \
+  operator_catalog_image="$IIB_IMAGE" \
+  operator_image_tag="olm-install-ignored" \
+  operator.install_channel=<CHANNEL> \
+  operator.install_version=<VERSION> \
+  operator.kogito_runtime_version=<KOGITO_VERSION> \
+  operator.quarkus_core_version=<QUARKUS_VERSION> \
+  tags="@devMode" format=pretty \
+  2>&1 | tee bdd-devMode.log
+```
+
+Replace `@devMode` with `@previewMode`, `@gitOpsMode`, `@platform`, or `@smoke` as needed.
+
+> **Pinning the installed version (`operator.install_version`).** Without it, OLM installs the head of the specified channel. With it, the suite creates the Subscription with `startingCSV: logic-operator.v<version>` and **manual** InstallPlan approval, then approves only the InstallPlan for that CSV. Cannot be combined with `upgrade.from_version`. Pass the Kogito/Quarkus versions that ship with the pinned operator version, otherwise the DI/JS version check fails.
+
+> **DI/JS version check.** Every scenario that deploys the Postgres Data Index/Job Service platform includes the step `Data Index and Job Service run the expected Kogito and Quarkus versions within 5 minutes`. It waits for the startup banner `data-index-service-postgresql <kogito> on JVM (powered by Quarkus <quarkus>) started in` (and the same for `jobs-service-postgresql`). It **fails** if `operator.kogito_runtime_version` or `operator.quarkus_core_version` is not set. Take the values from the release notes or from the Data Index pod log of the operator under test.
+
+> **Why `operator_image_tag`?** When `operator_image_tag` is empty, the installer falls back to the **community** catalog ([`installers/sonataflow_installer.go`](installers/sonataflow_installer.go)). In OLM mode the value itself is not used, so any non-empty placeholder works.
 
 ### `@upgradeTests`: OLM upgrade
 
@@ -110,34 +141,37 @@ make -C testbdd run-tests \
 
 - **Design notes:** the scenario flow and the planned work are described in [`_agents/upgrade-tests.md`](../_agents/upgrade-tests.md) and [`tasks/`](../tasks).
 
-### `@installation` / `@smoke`: YAML install
+### `@installation`: OLM install validation
 
-These scenarios use the step `SonataFlow Operator is deployed`, which applies `operator.yaml` (`operator_yaml_uri`). They patch the operator image and the related images:
+This scenario verifies the operator installed by `BeforeSuite` is fully operational: pod running, metrics Service present, builder and controllers ConfigMaps present with expected content. It uses the standard OLM flags and runs with the unified suite or in isolation:
 
 ```bash
 make -C testbdd run-tests \
   cr_deployment_only=true \
-  operator_image_tag="<registry>/openshift-serverless-1-logic-rhel9-operator:<tag>" \
-  "operator.related_image.base_builder=<registry>/openshift-serverless-1-logic-swf-builder-rhel9:<tag>" \
+  operator_installation_source=olm \
+  operator_catalog_image="$IIB_IMAGE" \
+  operator_image_tag="olm-install-ignored" \
+  operator.install_channel=<CHANNEL> \
+  operator.install_version=<VERSION> \
   tags="@installation" \
   format=pretty
 ```
 
-The script [`run_custom_operator_test.sh`](../run_custom_operator_test.sh) shows a full example with all related images.
-
 ## Tags
 
-| Tag | Feature file(s) | Operator install | Extra parameters |
-|---|---|---|---|
-| `@devMode` | [`platform_default.feature`](features/sonataflow/platform/platform_default.feature), [`platform_with_data_index_and_job_service.feature`](features/sonataflow/platform/platform_with_data_index_and_job_service.feature) | Global (`BeforeSuite`) | none |
-| `@previewMode` | [`platform_configmap_properties.feature`](features/sonataflow/platform/platform_configmap_properties.feature), `platform_with_data_index_and_job_service.feature` | Global | none |
-| `@gitOpsMode` | `platform_default.feature`, `platform_with_data_index_and_job_service.feature` | Global | none |
-| `@platform` | [`platform_service_custom_labels.feature`](features/sonataflow/platform/platform_service_custom_labels.feature) | Scenario step (OLM) | `operator.version` |
-| `@upgradeTests` | [`operator_upgrade.feature`](features/operator/operator_upgrade.feature) | Scenario steps (OLM) | `upgrade.*` (see above) |
-| `@installation` | [`install_logic_operator_yaml.feature`](features/installation/install_logic_operator_yaml.feature) | Scenario step (YAML) | `operator_image_tag`, related images |
-| `@smoke` | [`deploy_job_service.feature`](features/job-service/deploy_job_service.feature), [`deploy_data_index_service.feature`](features/data-index/deploy_data_index_service.feature) | Scenario step (YAML) | `operator_image_tag` |
-| `@workflows100` | [`deploy_100_workflows_with_di_js_postgresql.feature`](features/sonataflow/performance/deploy_100_workflows_with_di_js_postgresql.feature) | Global | none (heavy) |
-| `@disabled` | any | | always skipped |
+| Tag | Feature file(s) | Operator install | DI/JS version check? | Notes |
+|---|---|---|---|---|
+| `@smoke` | [`smoke/smoke_operator_services.feature`](features/smoke/smoke_operator_services.feature) | Global (`BeforeSuite`) | Yes | Pipeline gate — run first |
+| `@devMode` | [`platform_default.feature`](features/sonataflow/platform/platform_default.feature) | Global | No — bare platform | DevMode is self-contained; no DI/JS used |
+| `@previewMode` | [`platform_with_di_js.feature`](features/sonataflow/platform/platform_with_di_js.feature), [`platform_configmap_properties.feature`](features/sonataflow/platform/platform_configmap_properties.feature) | Global | Yes | |
+| `@gitOpsMode` | [`platform_default.feature`](features/sonataflow/platform/platform_default.feature) (bare), [`platform_with_di_js.feature`](features/sonataflow/platform/platform_with_di_js.feature) (Postgres) | Global | Bare: No / Postgres: Yes | Two infrastructure configurations |
+| `@platform` | [`platform_service_custom_labels.feature`](features/sonataflow/platform/platform_service_custom_labels.feature) | Global | Yes | Platform-level reconciliation tests; no workflow deployed |
+| `@upgradeTests` | [`operator_upgrade.feature`](features/operator/operator_upgrade.feature) | Scenario steps (OLM) | Uses `upgrade.to_*` vars | Always excluded unless explicitly requested |
+| `@installation` | [`install_logic_operator_yaml.feature`](features/installation/install_logic_operator_yaml.feature) | Global (`BeforeSuite`) | No | Validates OLM install: pod, Service, ConfigMaps |
+| `@workflows100` | [`deploy_100_workflows_with_di_js_postgresql.feature`](features/sonataflow/performance/deploy_100_workflows_with_di_js_postgresql.feature) | Global | Yes | Performance/scale test |
+| `@disabled` | any | — | — | Always skipped |
+
+`operator.kogito_runtime_version` and `operator.quarkus_core_version` are required for every scenario that deploys the Postgres DI/JS platform (all tags above where "DI/JS version check" is Yes).
 
 Tag expressions:
 - `"@a"`: scenarios with tag `a`
@@ -163,6 +197,9 @@ Pass parameters to `make run-tests` as `key=value`. Run `../hack/run-tests.sh --
 | `operator_yaml_uri` | URL or path of `operator.yaml` for YAML installs |
 | `operator.related_image.<name>` | Override related images for YAML installs: `jobs_service_postgresql`, `jobs_service_ephemeral`, `data_index_postgresql`, `data_index_ephemeral`, `db_migrator_tool`, `base_builder`, `devmode` |
 | `operator.version` | Operator version installed by the `SonataFlow Operator is installed via OLM` step |
+| `operator.install_channel` | Subscription channel of the suite-level OLM install. Empty means `stable`. Same restrictions as `operator.install_version`. |
+| `operator.install_version` | Pins the version of the suite-level OLM install (`@devMode`, `@previewMode`, `@gitOpsMode`, `@workflows100`). Empty installs the channel head. Cannot be combined with `operator.version` or `upgrade.from_version`. |
+| `operator.kogito_runtime_version` / `operator.quarkus_core_version` | Versions expected in Data Index/Job Service startup logs. Required by every scenario that deploys the Postgres DI/JS platform (the upgrade scenario uses `upgrade.to_*` instead). |
 | `upgrade.from_version` / `upgrade.to_version` | Upgrade source and target versions |
 | `upgrade.to_kogito_runtime_version` / `upgrade.to_quarkus_core_version` | Versions expected in Data Index/Job Service logs after the upgrade |
 | `olm_namespace` | Namespace for cluster-wide operators (default `openshift-operators`) |
@@ -222,6 +259,7 @@ Clean up the subscription and CSV first. A leftover subscription is reused as-is
 |---|---|
 | `panic: The 'domain_suffix' argument is required using Kubernetes cluster` | The suite did not detect OpenShift. Check `oc whoami --show-server` and `$KUBECONFIG`, then log in again. On Kind or Minikube, set `local_cluster=true`. |
 | CatalogSource never `READY` | The cluster cannot pull the index image. Check the pull secret and the mirror configuration (ICSP/IDMS) for the registry. |
+| Operator install times out; Subscription shows `BundleUnpacking=True`, reason `UnpackingInProgress` | The bundle unpack Job in `openshift-marketplace` cannot pull the bundle image (`oc get pods -n openshift-marketplace`, look for `Init:ImagePullBackOff`). The index references bundles on a registry the cluster has no credentials for (for example `registry.stage.redhat.io`). Add the credentials to the cluster pull secret or mirror the registry with an ImageContentSourcePolicy/ImageDigestMirrorSet. |
 | `Error bumping events ... could not find the requested resource` | Harmless. The framework still calls the deprecated v1beta1 events API. |
 | `Error while retrieving log ... no route to host` on port 10250 | A node's kubelet is unreachable for log collection. Only logs are lost; check `oc get nodes`. |
 | Upgrade teardown logs `Error uninstalling service from cluster` | Known issue: the subscription source changes during the upgrade. Use the cleanup commands above. |

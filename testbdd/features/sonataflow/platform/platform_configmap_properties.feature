@@ -4,6 +4,7 @@ Feature: Validate ConfigMap property content for Workflow, Data Index and Job Se
     Given Namespace is created
     When Postgres is deployed
     When SonataFlowPlatform with DataIndexAndJobsService using Postgres is deployed
+    Then Data Index and Job Service run the expected Kogito and Quarkus versions within 5 minutes
 
   @previewMode
   Scenario: Verify workflow ConfigMap properties after deploying callbackstatetimeouts

@@ -85,8 +85,14 @@ type TestConfig struct {
 	examplesRepositoryRef       string
 	examplesRepositoryIgnoreSSL bool
 
-	// operator version (for non-upgrade scenarios that still need a specific version installed via OLM)
-	operatorVersion string
+	// operator version pinned by the suite-level (global) OLM install
+	operatorInstallVersion string
+	// OLM channel used by the suite-level (global) OLM install
+	operatorInstallChannel string
+
+	// expected Data Index / Job Service runtime versions for the installed operator
+	operatorKogitoRuntimeVersion string
+	operatorQuarkusCoreVersion   string
 
 	// upgrade testing
 	upgradeFromVersion            string
@@ -170,7 +176,7 @@ func BindFlags(set *flag.FlagSet) {
 		flagName := strings.ToLower(strings.TrimPrefix(v, "RELATED_IMAGE_"))
 		// set.String automatically returns a *string linked to the CLI flag!
 		relatedImagePointers[v] = set.String(
-			"operator.related_image."+flagName,
+			prefix+"operator.related_image."+flagName,
 			"",
 			fmt.Sprintf("Override for %s", v),
 		)
@@ -213,8 +219,11 @@ func BindFlags(set *flag.FlagSet) {
 	set.StringVar(&env.examplesRepositoryRef, prefix+"examples_ref", "", "Set the branch for the kogito-examples repository")
 	set.BoolVar(&env.examplesRepositoryIgnoreSSL, prefix+"examples_ignore_ssl", false, "Set to true to ignore SSL check when checking out examples repository")
 
-	// operator version for non-upgrade OLM installs
-	set.StringVar(&env.operatorVersion, prefix+"operator.version", "", "Operator version to install via OLM (e.g. 1.39.0)")
+	set.StringVar(&env.operatorInstallVersion, prefix+"operator.install_version", "", "Operator version installed by the suite-level OLM install (e.g. 1.37.3). Pins startingCSV with manual InstallPlan approval. Empty means the head of the channel.")
+	set.StringVar(&env.operatorInstallChannel, prefix+"operator.install_channel", "", "OLM channel used by the suite-level OLM install (e.g. stable-1.37). Empty means the default channel (stable).")
+
+	set.StringVar(&env.operatorKogitoRuntimeVersion, prefix+"operator.kogito_runtime_version", "", "Kogito runtime version expected in Data Index/Job Service logs for the installed operator (e.g. 9.106.0.redhat-00005)")
+	set.StringVar(&env.operatorQuarkusCoreVersion, prefix+"operator.quarkus_core_version", "", "Quarkus core version expected in Data Index/Job Service logs for the installed operator (e.g. 3.33.3.redhat-00007)")
 
 	// upgrade testing
 	set.StringVar(&env.upgradeFromVersion, prefix+"upgrade.from_version", "", "Operator version to upgrade from (e.g. 1.37.2)")
@@ -544,9 +553,24 @@ func GetUpgradeToQuarkusCoreVersion() string {
 	return env.upgradeToQuarkusCoreVersion
 }
 
-// GetOperatorVersion returns the operator version to install via OLM for non-upgrade scenarios
-func GetOperatorVersion() string {
-	return env.operatorVersion
+// GetOperatorInstallVersion returns the operator version pinned by the suite-level OLM install, empty when not pinned
+func GetOperatorInstallVersion() string {
+	return env.operatorInstallVersion
+}
+
+// GetOperatorInstallChannel returns the OLM channel of the suite-level OLM install, empty when the default channel is used
+func GetOperatorInstallChannel() string {
+	return env.operatorInstallChannel
+}
+
+// GetOperatorKogitoRuntimeVersion returns the Kogito runtime version expected in Data Index/Job Service logs
+func GetOperatorKogitoRuntimeVersion() string {
+	return env.operatorKogitoRuntimeVersion
+}
+
+// GetOperatorQuarkusCoreVersion returns the Quarkus core version expected in Data Index/Job Service logs
+func GetOperatorQuarkusCoreVersion() string {
+	return env.operatorQuarkusCoreVersion
 }
 
 // Infinispan
