@@ -7,7 +7,7 @@ Feature: Deploy SonataFlowPlatform with default configuration
   # self-contained — they never connect to Data Index or Job Service even when those pods are
   # running in the same namespace. The bare platform Background here is the correct and
   # sufficient environment for devMode testing. Do not add devMode scenarios to feature files
-  # whose Background deploys DI/JS — the setup cost is wasted and misleads readers.
+  # whose Background deploys platform with DI/JS — the setup cost is wasted and misleads readers.
 
   Background:
     Given Namespace is created

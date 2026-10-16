@@ -72,11 +72,16 @@ func (data *Data) sonataFlowOperatorHasPodsRunning(numberOfPods int) error {
 	return framework.WaitForPodsWithLabel(data.OperatorNamespace, "app.kubernetes.io/name", "sonataflow-operator", numberOfPods, 1)
 }
 
-// sonataFlowOperatorIsRunning verifies that the operator pod is present and ready in
-// openshift-serverless-logic. It does not install anything — use this step whenever a
-// scenario needs to assert the operator is healthy before proceeding.
+// sonataFlowOperatorIsRunning verifies that the OLM-managed operator pod is present and ready
+// in openshift-operators (the cluster operator namespace where OLM deploys the pod).
+// It does not install anything — use this step whenever a scenario needs to assert the
+// operator is healthy before proceeding.
+// It also sets data.OperatorNamespace to openshift-operators so that subsequent ConfigMap
+// and Service checks resolve to the correct namespace where OLM places operator-owned
+// resources (builder-config, metrics-service, etc.).
 func (data *Data) sonataFlowOperatorIsRunning() error {
-	return framework.WaitForPodsWithLabel(installers.LogicOperatorNamespace, "app.kubernetes.io/name", "sonataflow-operator", 1, 2)
+	data.OperatorNamespace = framework.GetClusterOperatorNamespace()
+	return framework.WaitForPodsWithLabel(framework.GetClusterOperatorNamespace(), "app.kubernetes.io/name", "sonataflow-operator", 1, 2)
 }
 
 func (data *Data) serviceExists(serviceName string) error {
@@ -177,9 +182,18 @@ func (data *Data) configMapContainsStrings(cmName string, table *godog.Table) er
 			builderImage := config.GetRelatedImage("RELATED_IMAGE_BASE_BUILDER")
 			framework.GetLogger(data.Namespace).Info("Builder Image is:", "Image:", builderImage)
 			if builderImage == "" {
-				// Fallback to the default if the property wasn't provided during the test run
-				builderImage = "registry.redhat.io/openshift-serverless-1/logic-swf-builder-rhel9:1.38.0"
+				// No explicit override — derive from the installed operator version.
+				// Use install_version (suite-level OLM pin) first, then operator.version.
+				version := config.GetOperatorInstallVersion()
+				if version == "" {
+					version = config.GetOperatorVersion()
+				}
+				if version == "" {
+					return fmt.Errorf("cannot resolve ${RELATED_IMAGE_BASE_BUILDER}: set operator.related_image.base_builder, operator.install_version, or operator.version")
+				}
+				builderImage = "registry.redhat.io/openshift-serverless-1/logic-swf-builder-rhel9:" + version
 			}
+			framework.GetLogger(data.Namespace).Info("Resolved RELATED_IMAGE_BASE_BUILDER", "image", builderImage)
 			expectedString = strings.ReplaceAll(expectedString, "${RELATED_IMAGE_BASE_BUILDER}", builderImage)
 		}
 

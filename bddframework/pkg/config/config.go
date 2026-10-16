@@ -179,7 +179,7 @@ func BindFlags(set *flag.FlagSet) {
 		flagName := strings.ToLower(strings.TrimPrefix(v, "RELATED_IMAGE_"))
 		// set.String automatically returns a *string linked to the CLI flag!
 		relatedImagePointers[v] = set.String(
-			"operator.related_image."+flagName,
+			prefix+"operator.related_image."+flagName,
 			"",
 			fmt.Sprintf("Override for %s", v),
 		)

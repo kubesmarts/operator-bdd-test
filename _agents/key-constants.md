@@ -121,7 +121,7 @@ Container name derived by `deploymentContainerName()`: strip `sonataflow-platfor
 | `@gitOpsMode` | GitOps-profile workflow scenarios. Appears in bare-platform and Postgres-platform files (two infrastructure configurations). |
 | `@platform` | Platform-level operator reconciliation tests (e.g. label propagation). No workflow deployed. Uses suite-level install. |
 | `@upgradeTests` | Upgrade scenario — excluded from all normal runs; must be passed explicitly. Scenario-managed install. |
-| `@installation` | YAML-install scenario — manual only; not part of the unified suite. |
+| `@installation` | OLM install validation: pod running, metrics Service, builder/controllers ConfigMaps. Runs in unified suite. |
 | `@workflows100` | 100 workflows on one DI/JS/Postgres platform (performance/scale). |
 | `@disabled` | Always skipped. |
 | `@performance` | Excluded by the executor unless requested; no feature currently uses it. |

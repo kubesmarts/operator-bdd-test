@@ -141,22 +141,21 @@ make -C testbdd run-tests \
 
 - **Design notes:** the scenario flow and the planned work are described in [`_agents/upgrade-tests.md`](../_agents/upgrade-tests.md) and [`tasks/`](../tasks).
 
-### `@installation`: YAML install (manual, not part of unified suite)
+### `@installation`: OLM install validation
 
-This scenario uses the step `SonataFlow Operator is deployed`, which applies `operator.yaml` (`operator_yaml_uri`). It patches the operator image and the related images:
+This scenario verifies the operator installed by `BeforeSuite` is fully operational: pod running, metrics Service present, builder and controllers ConfigMaps present with expected content. It uses the standard OLM flags and runs with the unified suite or in isolation:
 
 ```bash
 make -C testbdd run-tests \
   cr_deployment_only=true \
-  operator_image_tag="<registry>/openshift-serverless-1-logic-rhel9-operator:<tag>" \
-  "operator.related_image.base_builder=<registry>/openshift-serverless-1-logic-swf-builder-rhel9:<tag>" \
-  operator.kogito_runtime_version=<kogito-version> \
-  operator.quarkus_core_version=<quarkus-version> \
+  operator_installation_source=olm \
+  operator_catalog_image="$IIB_IMAGE" \
+  operator_image_tag="olm-install-ignored" \
+  operator.install_channel=<CHANNEL> \
+  operator.install_version=<VERSION> \
   tags="@installation" \
   format=pretty
 ```
-
-The script [`run_custom_operator_test.sh`](../run_custom_operator_test.sh) shows a full example with all related images.
 
 ## Tags
 
@@ -168,7 +167,7 @@ The script [`run_custom_operator_test.sh`](../run_custom_operator_test.sh) shows
 | `@gitOpsMode` | [`platform_default.feature`](features/sonataflow/platform/platform_default.feature) (bare), [`platform_with_di_js.feature`](features/sonataflow/platform/platform_with_di_js.feature) (Postgres) | Global | Bare: No / Postgres: Yes | Two infrastructure configurations |
 | `@platform` | [`platform_service_custom_labels.feature`](features/sonataflow/platform/platform_service_custom_labels.feature) | Global | Yes | Platform-level reconciliation tests; no workflow deployed |
 | `@upgradeTests` | [`operator_upgrade.feature`](features/operator/operator_upgrade.feature) | Scenario steps (OLM) | Uses `upgrade.to_*` vars | Always excluded unless explicitly requested |
-| `@installation` | [`install_logic_operator_yaml.feature`](features/installation/install_logic_operator_yaml.feature) | Scenario step (YAML) | Yes | Manual YAML-install runs only; not in unified suite |
+| `@installation` | [`install_logic_operator_yaml.feature`](features/installation/install_logic_operator_yaml.feature) | Global (`BeforeSuite`) | No | Validates OLM install: pod, Service, ConfigMaps |
 | `@workflows100` | [`deploy_100_workflows_with_di_js_postgresql.feature`](features/sonataflow/performance/deploy_100_workflows_with_di_js_postgresql.feature) | Global | Yes | Performance/scale test |
 | `@disabled` | any | — | — | Always skipped |
 
