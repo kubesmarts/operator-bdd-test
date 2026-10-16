@@ -4,15 +4,18 @@ Feature: SonataFlowPlatform services propagate custom pod-template labels to Dep
   So that the operator propagates those labels to the managed Deployments
   and external tooling (e.g. network-policy controllers) can select the pods
 
-  # Run with:
-  #   --godog.tags=@platform
-  #   --tests.cr_deployment_only=true
-  #   --tests.operator_installation_source=olm
-  #   --tests.operator_catalog_image=registry-proxy.engineering.redhat.com/rh-osbs/iib:1196314
-  #   --tests.operator.version=1.39.0
+  # Run with the unified suite command (no tags needed), or in isolation:
+  #   tags=@platform
+  #   cr_deployment_only=true
+  #   operator_installation_source=olm
+  #   operator_catalog_image=registry-proxy.engineering.redhat.com/rh-osbs/iib:<INDEX>
+  #   operator_image_tag=olm-install-ignored
+  #   operator.install_channel=<CHANNEL>
+  #   operator.install_version=<VERSION>
+  #   operator.kogito_runtime_version=<KOGITO_VERSION>
+  #   operator.quarkus_core_version=<QUARKUS_VERSION>
 
   Background:
-    Given SonataFlow Operator is installed via OLM
     Given Namespace is created
     When Postgres is deployed
     When SonataFlowPlatform with DataIndexAndJobsService using Postgres is deployed

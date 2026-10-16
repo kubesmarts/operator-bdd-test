@@ -54,7 +54,7 @@ All flags prefixed `--tests.upgrade.*`:
 | `operator_installation_source` | `""` | `config.GetOperatorInstallationSource()` |
 | `operator_catalog_image` | `""` | `config.GetOperatorCatalogImage()` |
 
-`operator.version` is used by `SonataFlow Operator is installed via OLM` (platform tests).
+`operator.version` is used by `SonataFlow Operator is installed via OLM` — only valid in `@upgradeTests` and `@installation` scenarios. Do not use for any other tag.
 `operator.install_version` pins the suite-level (global) OLM install: `GetSonataFlowInstaller()` sets
 `StartingCSV=logic-operator.v<version>` and `PinStartingCSV=true`, and
 `framework.InstallClusterWideOperatorAtCSV` creates the Subscription with manual approval and approves only the
@@ -115,10 +115,13 @@ Container name derived by `deploymentContainerName()`: strip `sonataflow-platfor
 
 | Tag | Meaning |
 |-----|---------|
-| `@upgradeTests` | Upgrade scenario — excluded from all normal runs; must be passed explicitly |
-| `@platform` | Custom pod-template labels on DI/JS (`platform_service_custom_labels.feature`); needs `operator.version` |
-| `@smoke` | Smoke subset (also selected by `smoke=true`) |
-| `@devMode` / `@previewMode` / `@gitOpsMode` | Profile-specific scenarios (ConfigMap props checks are `@previewMode`) |
-| `@workflows100` | 100 workflows on one DI/JS/Postgres platform |
-| `@disabled` | Always skipped |
-| `@performance` | Excluded by the executor unless requested; no feature currently uses it |
+| `@smoke` | Pipeline gate: operator running + DI/JS deploy + version check. Run before full suite. Also selected by `smoke=true`. |
+| `@devMode` | Dev-profile workflow scenarios on a bare platform. DevMode is self-contained — no DI/JS connectivity. |
+| `@previewMode` | Preview-profile workflow and ConfigMap property scenarios on Postgres DI/JS platform. |
+| `@gitOpsMode` | GitOps-profile workflow scenarios. Appears in bare-platform and Postgres-platform files (two infrastructure configurations). |
+| `@platform` | Platform-level operator reconciliation tests (e.g. label propagation). No workflow deployed. Uses suite-level install. |
+| `@upgradeTests` | Upgrade scenario — excluded from all normal runs; must be passed explicitly. Scenario-managed install. |
+| `@installation` | YAML-install scenario — manual only; not part of the unified suite. |
+| `@workflows100` | 100 workflows on one DI/JS/Postgres platform (performance/scale). |
+| `@disabled` | Always skipped. |
+| `@performance` | Excluded by the executor unless requested; no feature currently uses it. |

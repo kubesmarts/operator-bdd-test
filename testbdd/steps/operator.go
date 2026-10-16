@@ -37,6 +37,7 @@ import (
 
 func registerOperatorSteps(ctx *godog.ScenarioContext, data *Data) {
 	ctx.Step(`^SonataFlow Operator is deployed$`, data.sonataFlowOperatorIsDeployed)
+	ctx.Step(`^SonataFlow Operator is running$`, data.sonataFlowOperatorIsRunning)
 	ctx.Step(`^SonataFlow Operator has (\d+) (?:pod|pods) running$`, data.sonataFlowOperatorHasPodsRunning)
 	ctx.Step(`^Service "([^"]*)" exists$`, data.serviceExists)
 	ctx.Step(`^ConfigMap "([^"]*)" exists$`, data.configMapExists)
@@ -69,6 +70,13 @@ func (data *Data) sonataFlowOperatorIsDeployed() (err error) {
 
 func (data *Data) sonataFlowOperatorHasPodsRunning(numberOfPods int) error {
 	return framework.WaitForPodsWithLabel(data.OperatorNamespace, "app.kubernetes.io/name", "sonataflow-operator", numberOfPods, 1)
+}
+
+// sonataFlowOperatorIsRunning verifies that the operator pod is present and ready in
+// openshift-serverless-logic. It does not install anything — use this step whenever a
+// scenario needs to assert the operator is healthy before proceeding.
+func (data *Data) sonataFlowOperatorIsRunning() error {
+	return framework.WaitForPodsWithLabel(installers.LogicOperatorNamespace, "app.kubernetes.io/name", "sonataflow-operator", 1, 2)
 }
 
 func (data *Data) serviceExists(serviceName string) error {
